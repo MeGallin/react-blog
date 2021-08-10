@@ -1,38 +1,258 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+/* variable setup */
+:root {
+  --main-bg-colour: rgba(32, 32, 32, 1);
+  --secondary-bg-colour: rgba(255, 99, 0, 1);
+  --light-orange: rgba(236, 127, 55, 1);
+  --burnt-orange: rgba(190, 79, 12, 1);
+  --main-font-colour: whitesmoke;
+  --border-colour: rgba(200, 200, 200, 0.5);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Set core body defaults */
+html {
+  height: 100%;
+}
+body {
+  font-family: 'Signika', sans-serif;
+  font-family: 'Comfortaa', cursive;
+  background-color: var(--main-bg-colour);
+  color: var(--main-font-colour);
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 0;
+  padding: 0.1em;
+}
+body p {
+  font-size: 14px;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a:link {
+  text-decoration: none;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-decoration: underline;
+  padding-bottom: 2px;
+}
+
+/* General global stye settings */
+
+body {
+  display: flex;
+  min-height: 100%;
+}
+#app-wrapper {
+  flex: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  min-height: 100%;
+  min-width: 100vw;
+}
+section {
+  border: 1px pink solid;
+  max-width: 1290px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.App-link {
-  color: #61dafb;
+footer {
+  margin-top: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+p {
+  line-height: 1.2;
+  font-size: clamp(1.6rem, 1.25vh, 1.25rem);
+  font-size: max(1.6rem, 1.125vw);
+  text-align: left;
+  margin-bottom: 0.4rem;
+}
+
+h1,
+h2,
+h3 {
+  display: inline-block;
+}
+
+/* General form styles */
+form {
+  background-image: linear-gradient(
+    to right,
+    rgba(100, 100, 100, 0.7),
+    rgba(51, 51, 51, 0.1)
+  );
+  margin: 0 auto;
+  border-radius: 1px;
+  color: var(--main-font-colour);
+  width: 100%;
+  padding: 10px 20px;
+}
+form legend {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+form label {
+  display: block;
+  margin-bottom: 8px;
+}
+form input[type='text'],
+form input[type='email'],
+form input[type='password'],
+form textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-left: 4px solid var(--secondary-bg-colour);
+  border-radius: 4px;
+  font-size: 15px;
+  margin: 0;
+  outline: 0;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  margin-bottom: 30px;
+}
+form input[type='text'].entered {
+  border-left: greenyellow 4px solid;
+}
+form input[type='email'].entered {
+  border-left: greenyellow 4px solid;
+}
+form textarea.entered {
+  border-left: greenyellow 4px solid;
+}
+form input[type='text'].invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+form input[type='email'].invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+form input[type='password'].entered {
+  border-left: greenyellow 4px solid;
+}
+form input[type='password'].invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+form textarea.invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+  min-height: 250px;
+}
+form textarea {
+  min-height: 250px;
+}
+.text-editor.entered {
+  border-left: greenyellow 4px solid;
+}
+.text-editor.invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+
+/* Fieldset for all the forms */
+
+fieldset.fieldSet {
+  border: 1px solid rgba(100, 100, 100, 0.7);
+}
+/* SCROLL-BAR CUSTOM STYLING */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--main-background-colour);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--main-font-colour);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-colour);
+}
+/* SCROLL-BAR CUSTOM STYLING */
+
+/* Home page blog view images */
+.img-fit {
+  max-height: 30%;
 }
