@@ -3,9 +3,9 @@ import HomeBlog from '../../components/blog/homeBlog/HomeBlog';
 
 function Home() {
   return (
-    <div>
+    <section>
       <HomeBlog />
-    </div>
+    </section>
   );
 }
 

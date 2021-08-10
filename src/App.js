@@ -9,7 +9,7 @@ import About from './views/about/About';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div id="app-wrapper">
         <Header />
         <Switch>
           <Route exact path="/">
