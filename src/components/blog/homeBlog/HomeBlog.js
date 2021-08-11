@@ -30,7 +30,7 @@ function HomeBlog({ blogs, getBlogsRequest }) {
 
 const mapStateToProps = (state) => {
   return {
-    blogs: state.httpReducer,
+    blogs: state.getReducer,
   };
 };
 

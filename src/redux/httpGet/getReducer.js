@@ -1,4 +1,4 @@
-import { GET_BLOGS, GET_BLOGS_SUCCESS, GET_BLOGS_FAILURE } from './httpTypes';
+import { GET_BLOGS, GET_BLOGS_SUCCESS, GET_BLOGS_FAILURE } from './getTypes';
 
 const initialState = {
   loading: false,

@@ -7,6 +7,7 @@ import Header from './components/header/Header';
 import Home from './views/home/Home';
 import Footer from './components/footer/Footer';
 import About from './views/about/About';
+import Admin from './components/blog/admin/Admin';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/admin">
+              <Admin />
             </Route>
           </Switch>
           <Footer />
