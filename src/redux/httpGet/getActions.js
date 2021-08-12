@@ -5,9 +5,7 @@ export const getBlogsRequest = () => {
   return (dispatch) => {
     dispatch(getBlogs);
     axios
-      .get(
-        'http://localhost/WebSitesDesigns/reactJs/react-redux-demo/src/assets/api/getBlog.php',
-      )
+      .get('http://localhost/reactBlogApi/getBlog.php')
       .then((res) => {
         const blogs = res.data;
         dispatch(getBlogsSuccess(blogs));

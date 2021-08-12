@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
+import { postBlogRequest } from '../../redux';
+import HomeBlog from '../blog/homeBlog/HomeBlog';
 import './BlogPostForm.css';
 
-function BlogPostForm() {
+function BlogPostForm(props) {
   const [legend] = useState('Post Blog');
   const [uuid, setUuid] = useState('');
   const [name, setName] = useState('');
@@ -18,9 +19,13 @@ function BlogPostForm() {
       heading: heading,
       message: message,
     };
-    console.log(formData);
+    props.postBlogRequest(formData);
   };
-  return (
+  return props.blog.errors ? (
+    <div>
+      <h1>{props.blog.errors}</h1>
+    </div>
+  ) : (
     <div>
       <fieldset className="fieldSet">
         <legend>{legend}</legend>
@@ -58,8 +63,19 @@ function BlogPostForm() {
           </button>
         </form>
       </fieldset>
+      <HomeBlog />
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    blog: state.postReducer,
+  };
+};
 
-export default BlogPostForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postBlogRequest: (formData) => dispatch(postBlogRequest(formData)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BlogPostForm);

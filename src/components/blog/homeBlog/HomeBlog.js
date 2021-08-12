@@ -21,6 +21,7 @@ function HomeBlog({ blogs, getBlogsRequest }) {
             <div key={blog.id}>
               <h1>{blog.heading}</h1>
               <p dangerouslySetInnerHTML={{ __html: blog.message }} />
+              <p>{blog.posted}</p>
             </div>
           ))}
       </div>
