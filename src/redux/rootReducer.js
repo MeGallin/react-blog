@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import httpReducer from './http/httpReducer';
+import getReducer from './httpGet/getReducer';
+import postReducer from './httpPost/postReducer';
 
 const rootReducer = combineReducers({
-  httpReducer: httpReducer,
+  getReducer: getReducer,
+  postReducer: postReducer,
 });
 
 export default rootReducer;

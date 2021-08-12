@@ -1,13 +1,11 @@
 import axios from 'axios';
-import { GET_BLOGS, GET_BLOGS_SUCCESS, GET_BLOGS_FAILURE } from './httpTypes';
+import { GET_BLOGS, GET_BLOGS_SUCCESS, GET_BLOGS_FAILURE } from './getTypes';
 
 export const getBlogsRequest = () => {
   return (dispatch) => {
     dispatch(getBlogs);
     axios
-      .get(
-        'http://localhost/WebSitesDesigns/reactJs/react-redux-demo/src/assets/api/getBlog.php',
-      )
+      .get('http://localhost/reactBlogApi/getBlog.php')
       .then((res) => {
         const blogs = res.data;
         dispatch(getBlogsSuccess(blogs));

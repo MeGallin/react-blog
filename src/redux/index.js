@@ -1,1 +1,2 @@
-export * from './http/httpActions';
+export * from './httpGet/getActions';
+export * from './httpPost/postActions';
