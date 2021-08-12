@@ -21,6 +21,7 @@ function BlogPostForm(props) {
     };
     props.postBlogRequest(formData);
   };
+
   return props.blog.errors ? (
     <div>
       <h1>{props.blog.errors}</h1>
