@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { postBlogRequest } from '../../redux';
-import HomeBlog from '../blog/homeBlog/HomeBlog';
 import './BlogPostForm.css';
 
 function BlogPostForm(props) {
@@ -64,7 +63,6 @@ function BlogPostForm(props) {
           </button>
         </form>
       </fieldset>
-      <HomeBlog />
     </div>
   );
 }
