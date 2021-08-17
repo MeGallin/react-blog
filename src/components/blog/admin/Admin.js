@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getBlogsRequest } from '../../../redux';
 import { putBlogRequest } from '../../../redux';
+import { deleteBlogRequest } from '../../../redux';
 import BlogPostForm from '../../blogPostForm/BlogPostForm';
 
-function Admin({ blogs, getBlogsRequest, putBlogRequest }) {
+function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
   const [displayForm, setDisplayForm] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [legend] = useState('Post Blog');
   const [admin, setAdmin] = useState(0);
   const [name, setName] = useState('');
@@ -24,6 +26,11 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest }) {
     setHeading(heading);
     setAdmin(admin);
     setMessage(message);
+  };
+
+  const handleDeleteConfirmation = (id) => {
+    deleteBlogRequest(id);
+    setShowDeleteConfirmation(false);
   };
 
   const handleSubmit = (e) => {
@@ -54,7 +61,15 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest }) {
           blogs.blogs &&
           blogs.blogs.map((blog) => (
             <div key={blog.id}>
-              {heading ? <h1>{heading}</h1> : <h1>{blog.heading}</h1>}
+              {heading ? (
+                <h1>
+                  {heading}[{blog.id}]
+                </h1>
+              ) : (
+                <h1>
+                  {blog.heading}[{blog.id}]
+                </h1>
+              )}
 
               <p dangerouslySetInnerHTML={{ __html: blog.message }} />
               <p>{blog.posted}</p>
@@ -151,7 +166,23 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest }) {
                     </fieldset>
                   </div>
                 ) : null}
-                <button>DELETE</button>
+                <button onClick={() => setShowDeleteConfirmation(true)}>
+                  DELETE
+                </button>
+                {showDeleteConfirmation ? (
+                  <div>
+                    Note: this could be a use case for a modal
+                    <span>
+                      Are you sure you want to delete <h3>{blog.heading}</h3>
+                    </span>
+                    <button onClick={() => handleDeleteConfirmation(blog.id)}>
+                      Yes, confirm
+                    </button>
+                    <button onClick={() => setShowDeleteConfirmation(false)}>
+                      No Thanks
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </div>
           ))}
@@ -170,6 +201,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBlogsRequest: () => dispatch(getBlogsRequest()),
     putBlogRequest: (formData) => dispatch(putBlogRequest(formData)),
+    deleteBlogRequest: (id) => dispatch(deleteBlogRequest(id)),
   };
 };
 
