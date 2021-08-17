@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './Admin.css';
 import { connect } from 'react-redux';
 import { getBlogsRequest } from '../../../redux';
 import { putBlogRequest } from '../../../redux';
@@ -13,7 +14,8 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
-  const [id, setId] = useState('');
+  const [showFormId, setShowFormId] = useState('');
+  const [showDeleteId, setShowDeleteId] = useState('');
 
   useEffect(() => {
     getBlogsRequest();
@@ -21,11 +23,16 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
 
   const showForm = (id, name, heading, admin, message) => {
     setDisplayForm(true);
-    setId(id);
+    setShowFormId(id);
     setName(name);
     setHeading(heading);
     setAdmin(admin);
     setMessage(message);
+  };
+
+  const showDeleteButtons = (id) => {
+    setShowDeleteConfirmation(true);
+    setShowDeleteId(id);
   };
 
   const handleDeleteConfirmation = (id) => {
@@ -35,15 +42,13 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let formData = {
-      id: id,
+      id: showFormId,
       name: name,
       heading: heading,
       admin: admin,
       message: message,
     };
-
     putBlogRequest(formData);
     setDisplayForm(false);
   };
@@ -61,16 +66,9 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
           blogs.blogs &&
           blogs.blogs.map((blog) => (
             <div key={blog.id}>
-              {heading ? (
-                <h1>
-                  {heading}[{blog.id}]
-                </h1>
-              ) : (
-                <h1>
-                  {blog.heading}[{blog.id}]
-                </h1>
-              )}
-
+              <h1>
+                {blog.heading}[{blog.id}]
+              </h1>
               <p dangerouslySetInnerHTML={{ __html: blog.message }} />
               <p>{blog.posted}</p>
               <p>{blog.name}</p>
@@ -93,7 +91,7 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                 ) : (
                   <button onClick={() => setDisplayForm(false)}>Cancel</button>
                 )}
-                {displayForm && blog.id === id ? (
+                {displayForm && blog.id === showFormId ? (
                   <div>
                     <fieldset className="fieldSet">
                       <legend>{legend}</legend>
@@ -103,8 +101,8 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                             ID
                             <input
                               readOnly
-                              value={id}
-                              onChange={(e) => setId(e.target.value)}
+                              value={showFormId}
+                              onChange={(e) => setShowFormId(e.target.value)}
                               type="text"
                               name="uuid"
                             />
@@ -158,7 +156,6 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                             />
                           </label>
                         </div>
-
                         <button type="submit" value="submit">
                           Submit
                         </button>
@@ -166,17 +163,21 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                     </fieldset>
                   </div>
                 ) : null}
-                <button onClick={() => setShowDeleteConfirmation(true)}>
-                  DELETE
+                <button onClick={() => showDeleteButtons(blog.id)}>
+                  DELETE {blog.id}
                 </button>
-                {showDeleteConfirmation ? (
-                  <div>
-                    Note: this could be a use case for a modal
-                    <span>
-                      Are you sure you want to delete <h3>{blog.heading}</h3>
-                    </span>
+
+                {showDeleteConfirmation && blog.id === showDeleteId ? (
+                  <div className="deleteConfirmationMessage">
+                    <h1>Note: this could be a use case for a modal</h1>
+                    <p>
+                      Are you sure you want to delete{' '}
+                      <span>
+                        {blog.heading}[{blog.id}]
+                      </span>
+                    </p>
                     <button onClick={() => handleDeleteConfirmation(blog.id)}>
-                      Yes, confirm
+                      Yes, DELETE !
                     </button>
                     <button onClick={() => setShowDeleteConfirmation(false)}>
                       No Thanks
