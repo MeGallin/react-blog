@@ -3,7 +3,7 @@ import {
   POST_REGISTRATION_SUCCESS,
   POST_REGISTRATION_FAILURE,
 } from './postRegistrationTypes';
-import { getBlogsRequest } from '../httpGet/getActions';
+import { getBlogsRequest } from '../httpBlog/httpBlogActions';
 
 export const postRegistrationRequest = (registrationData) => {
   return (dispatch) => {
