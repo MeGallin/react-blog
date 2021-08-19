@@ -52,6 +52,7 @@ function LoginForm({ loginRequest, loginUserAndPwdFailureMessage }) {
     </React.Fragment>
   );
 }
+
 const mapStateToProps = (state) => {
   return {
     isAuthorized: state.loginReducer,
