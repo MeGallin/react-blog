@@ -7,6 +7,7 @@ function HomeBlog({ blogs, getBlogsRequest }) {
   useEffect(() => {
     getBlogsRequest();
   }, [getBlogsRequest]);
+
   return blogs.loading ? (
     <h2>Loading </h2>
   ) : blogs.error ? (

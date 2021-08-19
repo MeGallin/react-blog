@@ -9,6 +9,7 @@ import Footer from './components/footer/Footer';
 import About from './views/about/About';
 import Admin from './components/blog/admin/Admin';
 import Registration from './views/registration/Registration';
+import Login from './views/login/Login';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route path="/register">
               <Registration />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
           </Switch>
           <Footer />
