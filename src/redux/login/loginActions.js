@@ -15,7 +15,7 @@ export const loginRequest = (userData, history) => {
         .post('http://localhost/reactBlogApi/login.php', userData)
         .then((res) => {
           const response = res.data;
-
+          console.log(response);
           if (response.length === 0) {
             const errorMessage = 'Wrong Username or Password';
             dispatch(userPwdFailure(errorMessage));
