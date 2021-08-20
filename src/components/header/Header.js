@@ -8,15 +8,27 @@ function Header(isAuthorized) {
   return (
     <header>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/admin">Admin</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/about">About</Link>
-        {isAuthorized.isAuthorized ? (
-          <LogoutButton />
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
+        <div>
+          <Link to="/">Home</Link>
+          {isAuthorized.isAuthorized ? (
+            <span>
+              <Link to="/admin">Admin</Link>
+              <Link to="/register">Register</Link>
+            </span>
+          ) : null}
+
+          <Link to="/about">About</Link>
+        </div>
+
+        <div>
+          {isAuthorized.isAuthorized ? (
+            <LogoutButton />
+          ) : (
+            <button>
+              <Link to="/login">Login</Link>
+            </button>
+          )}
+        </div>
       </nav>
     </header>
   );

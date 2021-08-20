@@ -57,6 +57,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0.1em;
+  overflow: hidden;
 }
 body p {
   font-size: 14px;
@@ -117,22 +118,21 @@ h6 {
 
 /* General global stye settings */
 
-body {
-  display: flex;
-  min-height: 100%;
-}
 #app-wrapper {
   flex: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   min-height: 100%;
-  min-width: 99vw;
+  min-width: 100%;
 }
 section {
   max-width: 1290px;
   width: 100%;
   margin: 0 auto;
+  height: 100vh;
+  overflow: auto;
+  margin-top: 64px; /* Allows for height of the header */
 }
 
 footer {
