@@ -132,7 +132,6 @@ section {
   margin: 0 auto;
   height: 100vh;
   overflow: auto;
-  margin-top: 64px; /* Allows for height of the header */
 }
 
 footer {

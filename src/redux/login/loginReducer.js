@@ -3,11 +3,13 @@ import {
   LOGIN_BLOG_FAILURE,
   LOGIN_USER_AND_PWD_FAILURE_MESSAGE,
   LOGOUT_SUCCESS,
+  USER_DATA,
 } from './loginTypes';
 
 const initialState = {
   isAuthorized: false,
   loginUserAndPwdFailureMessage: '',
+  userData: [],
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -23,6 +25,7 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthorized: false,
+        userData: [],
       };
     case LOGIN_USER_AND_PWD_FAILURE_MESSAGE:
       return {
@@ -33,6 +36,11 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthorized: action.payload,
+      };
+    case USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
       };
 
     default:

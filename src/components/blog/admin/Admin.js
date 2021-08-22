@@ -6,7 +6,14 @@ import { putBlogRequest } from '../../../redux';
 import { deleteBlogRequest } from '../../../redux';
 import BlogPostForm from '../../blogPostForm/BlogPostForm';
 
-function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
+function Admin({
+  blogs,
+  getBlogsRequest,
+  putBlogRequest,
+  deleteBlogRequest,
+
+  userData,
+}) {
   const [displayForm, setDisplayForm] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [legend] = useState('Post Blog');
@@ -59,7 +66,8 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
     <h2>{blogs.error}</h2>
   ) : (
     <section>
-      <h2>Admin panel</h2>
+      <h2>Admin panel here</h2>
+
       <BlogPostForm />
       <div>
         {blogs.blogs &&
@@ -67,7 +75,7 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
           blogs.blogs.map((blog) => (
             <div key={blog.id}>
               <h1>
-                {blog.heading}[{blog.id}]
+                {blog.heading}[{blog.id}]{blog.name}
               </h1>
               <p dangerouslySetInnerHTML={{ __html: blog.message }} />
               <p>{blog.posted}</p>
@@ -101,7 +109,7 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                             ID
                             <input
                               readOnly
-                              value={showFormId}
+                              value={userData.userData[0].uuid}
                               onChange={(e) => setShowFormId(e.target.value)}
                               type="text"
                               name="uuid"
@@ -114,7 +122,10 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
                             Name
                             <input
                               readOnly
-                              value={name}
+                              value={
+                                userData.userData[0].name +
+                                userData.userData[0].surname
+                              }
                               onChange={(e) => setName(e.target.value)}
                               type="text"
                               name="name"
@@ -195,6 +206,7 @@ function Admin({ blogs, getBlogsRequest, putBlogRequest, deleteBlogRequest }) {
 const mapStateToProps = (state) => {
   return {
     blogs: state.getReducer,
+    userData: state.loginReducer,
   };
 };
 

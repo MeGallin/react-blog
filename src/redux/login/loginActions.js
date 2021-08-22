@@ -4,6 +4,7 @@ import {
   LOGIN_BLOG_FAILURE,
   LOGIN_USER_AND_PWD_FAILURE_MESSAGE,
   LOGOUT_SUCCESS,
+  USER_DATA,
 } from './loginTypes';
 
 export const loginRequest = (userData, history) => {
@@ -15,7 +16,6 @@ export const loginRequest = (userData, history) => {
         .post('http://localhost/reactBlogApi/login.php', userData)
         .then((res) => {
           const response = res.data;
-          console.log(response);
           if (response.length === 0) {
             const errorMessage = 'Wrong Username or Password';
             dispatch(userPwdFailure(errorMessage));
@@ -23,6 +23,7 @@ export const loginRequest = (userData, history) => {
             if (response[0].email === userData.email && userData.pwd) {
               dispatch(loginSuccess(true));
               history.push('/admin');
+              dispatch(getUserData(response));
             }
           }
         })
@@ -68,5 +69,13 @@ export const logoutSuccess = (isAuthorized) => {
   return {
     type: LOGOUT_SUCCESS,
     payload: isAuthorized,
+  };
+};
+
+// Fetch user data from response object
+export const getUserData = (userData) => {
+  return {
+    type: USER_DATA,
+    payload: userData,
   };
 };
