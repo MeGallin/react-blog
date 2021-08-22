@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { postBlogRequest } from '../../redux';
 import './BlogPostForm.css';
 
-function BlogPostForm(props) {
+function BlogPostForm({ blog, userData, postBlogRequest }) {
   const [legend] = useState('Post Blog');
   const [uuid, setUuid] = useState('');
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (userData.isAuthorized && userData.userData.length !== 0) {
+      setUuid(userData.userData[0].uuid);
+      setName(userData.userData[0].name);
+    }
+  }, [userData.isAuthorized, userData.userData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,12 +25,12 @@ function BlogPostForm(props) {
       heading: heading,
       message: message,
     };
-    props.postBlogRequest(formData);
+    postBlogRequest(formData);
   };
 
-  return props.blog.errors ? (
+  return blog.errors ? (
     <div>
-      <h1>{props.blog.errors}</h1>
+      <h1>{blog.errors}</h1>
     </div>
   ) : (
     <div>
@@ -31,6 +38,7 @@ function BlogPostForm(props) {
         <legend>{legend}</legend>
         <form onSubmit={handleSubmit}>
           <input
+            readOnly
             value={uuid}
             onChange={(e) => setUuid(e.target.value)}
             placeholder="uuid"
@@ -38,6 +46,7 @@ function BlogPostForm(props) {
             name="uuid"
           />
           <input
+            readOnly
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="name"
@@ -69,6 +78,7 @@ function BlogPostForm(props) {
 const mapStateToProps = (state) => {
   return {
     blog: state.postReducer,
+    userData: state.loginReducer,
   };
 };
 

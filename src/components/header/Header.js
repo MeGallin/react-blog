@@ -10,7 +10,7 @@ function Header(isAuthorized) {
       <nav>
         <div>
           <Link to="/">Home</Link>
-          {isAuthorized.isAuthorized ? (
+          {isAuthorized.isAuthorized.isAuthorized ? (
             <span>
               <Link to="/admin">Admin</Link>
               <Link to="/register">Register</Link>
@@ -21,8 +21,10 @@ function Header(isAuthorized) {
         </div>
 
         <div>
-          {isAuthorized.isAuthorized ? (
-            <LogoutButton />
+          {isAuthorized.isAuthorized.isAuthorized ? (
+            <div>
+              <LogoutButton />
+            </div>
           ) : (
             <button>
               <Link to="/login">Login</Link>
@@ -36,7 +38,7 @@ function Header(isAuthorized) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthorized: state.loginReducer.isAuthorized,
+    isAuthorized: state.loginReducer,
   };
 };
 
