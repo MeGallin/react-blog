@@ -26,6 +26,8 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
       message: message,
     };
     postBlogRequest(formData);
+    setHeading('');
+    setMessage('');
   };
 
   return blog.errors ? (
