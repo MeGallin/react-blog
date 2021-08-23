@@ -4,7 +4,8 @@ import { postRegistrationRequest } from '../../redux';
 import './RegistrationForm.css';
 import { v4 as uuidv4 } from 'uuid';
 
-function RegistrationForm(props) {
+function RegistrationForm({ postRegistrationRequest }) {
+  console.log();
   const [legend] = useState('Registration Form');
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -23,7 +24,12 @@ function RegistrationForm(props) {
       uuid: uuid,
     };
 
-    props.postRegistrationRequest(formData);
+    postRegistrationRequest(formData);
+
+    setName('');
+    setSurname('');
+    setEmail('');
+    setPwd('');
   };
 
   return (
