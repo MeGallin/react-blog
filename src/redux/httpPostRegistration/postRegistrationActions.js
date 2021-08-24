@@ -21,6 +21,9 @@ export const postRegistrationRequest = (registrationData, history) => {
           // Redirect to login page
           history.push('/login');
           dispatch(registrationConfirmation(true));
+          setTimeout(() => {
+            dispatch(registrationConfirmation(false));
+          }, 6000);
         }
       })
       .catch((err) => {
