@@ -1,12 +1,16 @@
 import {
   POST_REGISTRATION_SUCCESS,
   POST_REGISTRATION_FAILURE,
+  POST_REGISTRATION_EXISTING_EMAIL,
+  POST_REGISTRATION_CONFIRMATION,
 } from './postRegistrationTypes';
 
 const initialState = {
   loading: false,
   registration: [],
   errors: '',
+  existingEmailMessage: false,
+  registrationConfirmationMessage: false,
 };
 
 const registrationReducer = (state = initialState, action) => {
@@ -24,6 +28,16 @@ const registrationReducer = (state = initialState, action) => {
         loading: false,
         registration: [],
         errors: action.payload,
+      };
+    case POST_REGISTRATION_EXISTING_EMAIL:
+      return {
+        ...state,
+        existingEmailMessage: action.payload,
+      };
+    case POST_REGISTRATION_CONFIRMATION:
+      return {
+        ...state,
+        registrationConfirmationMessage: action.payload,
       };
 
     default:

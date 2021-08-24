@@ -47,7 +47,7 @@ if(isset($postdata) && !empty($postdata))
       'pwd' => $pwd,
       'uuid' => $uuid,
     ];
-    echo json_encode($authdata);
+    print json_encode($authdata);
   }
   else
   {

@@ -3,15 +3,19 @@ import { connect } from 'react-redux';
 import { postRegistrationRequest } from '../../redux';
 import './RegistrationForm.css';
 import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
 
-function RegistrationForm({ postRegistrationRequest }) {
-  console.log();
+function RegistrationForm({ registration, postRegistrationRequest }) {
+  const history = useHistory();
   const [legend] = useState('Registration Form');
+  const [emailExistsMessage, setEmailExistsMessage] = useState('');
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [pwd, setPwd] = useState('');
   const [uuid] = useState(uuidv4());
+
+  console.log(registration.existingEmailMessage);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,12 +28,19 @@ function RegistrationForm({ postRegistrationRequest }) {
       uuid: uuid,
     };
 
-    postRegistrationRequest(formData);
+    postRegistrationRequest(formData, history);
 
-    setName('');
-    setSurname('');
-    setEmail('');
-    setPwd('');
+    if (registration.existingEmailMessage) {
+      setName('');
+      setSurname('');
+      setEmail('');
+      setPwd('');
+      setEmailExistsMessage('');
+    } else {
+      setEmailExistsMessage(
+        'Sorry, that email is already in use. Please use another email address.',
+      );
+    }
   };
 
   return (
@@ -69,20 +80,23 @@ function RegistrationForm({ postRegistrationRequest }) {
           Submit
         </button>
       </form>
+      <div>
+        <div className="failedLoginMessage">{emailExistsMessage}</div>
+      </div>
     </fieldset>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    registration: state.postRegistrationReducer,
+    registration: state.registrationReducer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    postRegistrationRequest: (formData) =>
-      dispatch(postRegistrationRequest(formData)),
+    postRegistrationRequest: (formData, history) =>
+      dispatch(postRegistrationRequest(formData, history)),
   };
 };
 
