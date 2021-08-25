@@ -108,8 +108,8 @@ function Admin({
                       <form onSubmit={handleSubmit}>
                         <div>
                           <FormInputs
-                            label="UUID"
                             readOnly
+                            label="UUID"
                             value={userData.userData[0].uuid}
                             onChange={(e) => setShowFormId(e.target.value)}
                             placeholder="uuid"
@@ -159,7 +159,7 @@ function Admin({
                           </label>
                         </div>
                         <div>
-                          <label for="message">
+                          <label htmlFor="message">
                             Blog
                             <textarea
                               value={message}

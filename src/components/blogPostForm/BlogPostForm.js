@@ -69,7 +69,7 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
             name="heading"
             className={!heading.length ? 'invalid' : 'entered'}
           />
-          <label for="message">
+          <label htmlFor="message">
             Blog
             <textarea
               value={message}

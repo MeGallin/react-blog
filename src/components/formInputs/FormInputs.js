@@ -15,17 +15,19 @@ function FormInputs({
 }) {
   return (
     <React.Fragment>
-      <label htmlFor={name}>{label}</label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        onChange={onChange}
-        className={className}
-        value={value}
-        error={error}
-      />
+      <label htmlFor={name}>
+        {label}
+        <input
+          id={name}
+          name={name}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          className={className}
+          value={value}
+          error={error}
+        />
+      </label>
       {error && <p className="failedLoginMessage">{error}</p>}
     </React.Fragment>
   );
