@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { getBlogsRequest, postLikeRequest } from '../../../redux';
+import {
+  getBlogsRequest,
+  postLikeRequest,
+  postDisLikeRequest,
+} from '../../../redux';
 import './HomeBlog.css';
 import SearchInput from '../../searchInput/SearchInput';
 
-function HomeBlog({ blogs, getBlogsRequest, postLikeRequest }) {
+function HomeBlog({
+  blogs,
+  getBlogsRequest,
+  postLikeRequest,
+  postDisLikeRequest,
+}) {
   const [searchField, setSearchField] = useState('');
   useEffect(() => {
     getBlogsRequest();
@@ -14,7 +23,7 @@ function HomeBlog({ blogs, getBlogsRequest, postLikeRequest }) {
     return blog.heading.toLowerCase().includes(searchField.toLowerCase());
   });
 
-  const handleLikes = (id, name, heading, message, likes) => {
+  const handleLike = (id, name, heading, message, likes) => {
     const data = {
       id: id,
       name: name,
@@ -22,8 +31,20 @@ function HomeBlog({ blogs, getBlogsRequest, postLikeRequest }) {
       message: message,
       likes: parseInt(likes) + 1,
     };
-    console.log(data);
+
     postLikeRequest(data);
+  };
+
+  const handleDisLike = (id, name, heading, message, dislikes) => {
+    const data = {
+      id: id,
+      name: name,
+      heading: heading,
+      message: message,
+      dislikes: parseInt(dislikes) + 1,
+    };
+
+    postDisLikeRequest(data);
   };
 
   return blogs.loading ? (
@@ -55,7 +76,7 @@ function HomeBlog({ blogs, getBlogsRequest, postLikeRequest }) {
                     <span
                       className="likes"
                       onClick={() =>
-                        handleLikes(
+                        handleLike(
                           blog.id,
                           blog.name,
                           blog.heading,
@@ -69,7 +90,18 @@ function HomeBlog({ blogs, getBlogsRequest, postLikeRequest }) {
                     </span>
                   </div>
                   <div>
-                    <span className="dislikes">
+                    <span
+                      className="dislikes"
+                      onClick={() =>
+                        handleDisLike(
+                          blog.id,
+                          blog.name,
+                          blog.heading,
+                          blog.message,
+                          blog.dislikes,
+                        )
+                      }
+                    >
                       <i className="far fa-thumbs-down"></i>
                       <span className="text-small">{blog.dislikes}</span>
                     </span>
@@ -94,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBlogsRequest: () => dispatch(getBlogsRequest()),
     postLikeRequest: (data) => dispatch(postLikeRequest(data)),
+    postDisLikeRequest: (data) => dispatch(postDisLikeRequest(data)),
   };
 };
 

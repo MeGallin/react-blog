@@ -11,6 +11,8 @@ import {
   POST_BLOG_FAILURE,
   POST_LIKE_SUCCESS,
   POST_LIKE_FAILURE,
+  POST_DIS_LIKE_SUCCESS,
+  POST_DIS_LIKE_FAILURE,
 } from './httpBlogTypes';
 
 // Get Actions
@@ -145,13 +147,11 @@ export const postBlogFailure = (error) => {
 
 // Post likes Action
 export const postLikeRequest = (postData) => {
-  // const convertedData = JSON.stringify(postData);
-  console.log(postData.likes);
   return (dispatch) => {
     axios
       .put('http://localhost/reactBlogApi/addLike.php', postData)
       .then(() => {
-        dispatch(postLike(1));
+        dispatch(postLike(postData.likes));
         dispatch(getBlogsRequest()); // Get the added blog post
       })
       .catch((err) => {
@@ -170,6 +170,36 @@ export const postLike = (payload) => {
 export const postLikeFailure = (error) => {
   return {
     type: POST_LIKE_FAILURE,
+    payload: error,
+  };
+};
+
+// POST DIS-LIKES
+export const postDisLikeRequest = (postData) => {
+  console.log(postData.dislikes);
+  return (dispatch) => {
+    axios
+      .put('http://localhost/reactBlogApi/addDisLike.php', postData)
+      .then(() => {
+        dispatch(postDisLike(postData.dislikes));
+        dispatch(getBlogsRequest()); // Get the added blog post
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorMsg = err.message;
+        dispatch(postBlogFailure(errorMsg));
+      });
+  };
+};
+export const postDisLike = (payload) => {
+  return {
+    type: POST_DIS_LIKE_SUCCESS,
+    payload: payload,
+  };
+};
+export const postDisLikeFailure = (error) => {
+  return {
+    type: POST_DIS_LIKE_FAILURE,
     payload: error,
   };
 };

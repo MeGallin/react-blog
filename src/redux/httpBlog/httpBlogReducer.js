@@ -10,6 +10,8 @@ import {
   POST_BLOG_FAILURE,
   POST_LIKE_SUCCESS,
   POST_LIKE_FAILURE,
+  POST_DIS_LIKE_SUCCESS,
+  POST_DIS_LIKE_FAILURE,
 } from './httpBlogTypes';
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
   blogs: [],
   errors: '',
   likes: null,
+  dislikes: null,
 };
 
 export const getReducer = (state = initialState, action) => {
@@ -119,6 +122,24 @@ export const postLikeReducer = (state = initialState, action) => {
         likes: action.payload,
       };
     case POST_LIKE_FAILURE:
+      return {
+        ...state,
+        errors: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const postDisLikeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case POST_DIS_LIKE_SUCCESS:
+      return {
+        ...state,
+        dislikes: action.payload,
+      };
+    case POST_DIS_LIKE_FAILURE:
       return {
         ...state,
         errors: action.payload,
