@@ -5,6 +5,7 @@ import { getBlogsRequest } from '../../../redux';
 import { putBlogRequest } from '../../../redux';
 import { deleteBlogRequest } from '../../../redux';
 import BlogPostForm from '../../blogPostForm/BlogPostForm';
+import FormInputs from '../../formInputs/FormInputs';
 
 function Admin({
   blogs,
@@ -69,6 +70,7 @@ function Admin({
       <h2>Admin panel here</h2>
 
       <BlogPostForm />
+
       <div>
         {blogs.blogs &&
           blogs.blogs &&
@@ -105,43 +107,43 @@ function Admin({
                       <legend>{legend}</legend>
                       <form onSubmit={handleSubmit}>
                         <div>
-                          <label htmlFor="id">
-                            ID
-                            <input
-                              readOnly
-                              value={userData.userData[0].uuid}
-                              onChange={(e) => setShowFormId(e.target.value)}
-                              type="text"
-                              name="uuid"
-                            />
-                          </label>
+                          <FormInputs
+                            label="UUID"
+                            readOnly
+                            value={userData.userData[0].uuid}
+                            onChange={(e) => setShowFormId(e.target.value)}
+                            placeholder="uuid"
+                            type="text"
+                            name="uuid"
+                            className={
+                              !userData.userData[0].uuid ? 'invalid' : 'entered'
+                            }
+                          />
                         </div>
 
                         <div>
-                          <label htmlFor="name">
-                            Name
-                            <input
-                              readOnly
-                              value={
-                                userData.userData[0].name +
-                                userData.userData[0].surname
-                              }
-                              onChange={(e) => setName(e.target.value)}
-                              type="text"
-                              name="name"
-                            />
-                          </label>
+                          <FormInputs
+                            readOnly
+                            label="Name"
+                            value={
+                              userData.userData[0].name +
+                              userData.userData[0].surname
+                            }
+                            onChange={(e) => setName(e.target.value)}
+                            type="text"
+                            name="name"
+                            className={!name ? 'invalid' : 'entered'}
+                          />
                         </div>
                         <div>
-                          <label htmlFor="heading">
-                            Heading
-                            <input
-                              value={heading}
-                              onChange={(e) => setHeading(e.target.value)}
-                              type="text"
-                              name="heading"
-                            />
-                          </label>
+                          <FormInputs
+                            label="Heading"
+                            value={heading}
+                            onChange={(e) => setHeading(e.target.value)}
+                            type="text"
+                            name="heading"
+                            className={!heading.length ? 'invalid' : 'entered'}
+                          />
                         </div>
                         <div>
                           <label htmlFor="admin">
@@ -157,13 +159,16 @@ function Admin({
                           </label>
                         </div>
                         <div>
-                          <label htmlFor="message">
-                            Message
+                          <label for="message">
+                            Blog
                             <textarea
                               value={message}
                               onChange={(e) => setMessage(e.target.value)}
                               type="text"
                               name="message"
+                              className={
+                                message.length < 10 ? 'invalid' : 'entered'
+                              }
                             />
                           </label>
                         </div>
