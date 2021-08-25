@@ -4,6 +4,12 @@ import { postRegistrationRequest } from '../../redux';
 import './RegistrationForm.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
+import FormInputs from '../formInputs/FormInputs';
+
+const nameRegEx = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{2,}$/;
+const emailRegEx =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
 
 function RegistrationForm({ registration, postRegistrationRequest }) {
   const history = useHistory();
@@ -15,8 +21,6 @@ function RegistrationForm({ registration, postRegistrationRequest }) {
   const [pwd, setPwd] = useState('');
   const [uuid] = useState(uuidv4());
 
-  console.log(registration.existingEmailMessage);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,9 +31,7 @@ function RegistrationForm({ registration, postRegistrationRequest }) {
       pwd: pwd,
       uuid: uuid,
     };
-
     postRegistrationRequest(formData, history);
-
     if (registration.existingEmailMessage) {
       setName('');
       setSurname('');
@@ -46,37 +48,78 @@ function RegistrationForm({ registration, postRegistrationRequest }) {
   return (
     <fieldset className="fieldSet">
       <legend>{legend}</legend>
+
       <form onSubmit={handleSubmit}>
-        <input
+        <FormInputs
+          label="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="name"
           type="text"
           name="name"
-        />
-        <input
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-          placeholder="surname"
-          type="text"
-          name="surname"
-        />
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="email"
-          type="email"
-          name="email"
-        />
-        <input
-          value={pwd}
-          onChange={(e) => setPwd(e.target.value)}
-          placeholder="pwd"
-          type="password"
-          name="pwd"
+          required
+          className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
+          error={
+            !nameRegEx.test(name) && name.length !== 0
+              ? `Name field must start with an uppercase letter and contain at least 3 letters and have no white space.`
+              : null
+          }
         />
 
-        <button type="submit" value="submit">
+        <FormInputs
+          label="Surname"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+          type="text"
+          name="surname"
+          required
+          className={!nameRegEx.test(surname) ? 'invalid' : 'entered'}
+          error={
+            !nameRegEx.test(surname) && surname.length !== 0
+              ? `Surname field must start with an uppercase letter and contain at least 3 letters and have no white space.`
+              : null
+          }
+        />
+
+        <FormInputs
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          name="email"
+          required
+          className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+          error={
+            !emailRegEx.test(email) && email.length !== 0
+              ? `Invalid email address.`
+              : null
+          }
+        />
+
+        <FormInputs
+          label="Password"
+          value={pwd}
+          onChange={(e) => setPwd(e.target.value)}
+          type="password"
+          name="pwd"
+          required
+          className={!pwdRegex.test(pwd) ? 'invalid' : 'entered'}
+          error={
+            !pwdRegex.test(pwd) && pwd.length !== 0
+              ? `Password must have at least 1 uppercase letter, a number and have a minimum length of 6.`
+              : null
+          }
+        />
+
+        <button
+          type="submit"
+          value="submit"
+          disabled={
+            !nameRegEx.test(name) ||
+            !nameRegEx.test(surname) ||
+            !emailRegEx.test(email) ||
+            !pwdRegex.test(pwd)
+          }
+        >
           Submit
         </button>
       </form>

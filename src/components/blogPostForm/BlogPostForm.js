@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { postBlogRequest } from '../../redux';
 import './BlogPostForm.css';
+import FormInputs from '../formInputs/FormInputs';
 
 function BlogPostForm({ blog, userData, postBlogRequest }) {
   const [legend] = useState('Post Blog');
@@ -39,36 +40,45 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
       <fieldset className="fieldSet">
         <legend>{legend}</legend>
         <form onSubmit={handleSubmit}>
-          <input
+          <FormInputs
+            label="UUID"
             readOnly
             value={uuid}
             onChange={(e) => setUuid(e.target.value)}
             placeholder="uuid"
             type="text"
             name="uuid"
+            className={!uuid ? 'invalid' : 'entered'}
           />
-          <input
+
+          <FormInputs
             readOnly
+            label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="name"
             type="text"
             name="name"
+            className={!name ? 'invalid' : 'entered'}
           />
-          <input
+
+          <FormInputs
+            label="Heading"
             value={heading}
             onChange={(e) => setHeading(e.target.value)}
-            placeholder="heading"
             type="text"
             name="heading"
+            className={!heading.length ? 'invalid' : 'entered'}
           />
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="message"
-            type="text"
-            name="message"
-          />
+          <label for="message">
+            Blog
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              type="text"
+              name="message"
+              className={message.length < 10 ? 'invalid' : 'entered'}
+            />
+          </label>
           <button type="submit" value="submit">
             Submit
           </button>
