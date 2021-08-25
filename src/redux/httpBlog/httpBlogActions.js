@@ -9,6 +9,8 @@ import {
   PUT_BLOG_FAILURE,
   POST_BLOG_SUCCESS,
   POST_BLOG_FAILURE,
+  POST_LIKE_SUCCESS,
+  POST_LIKE_FAILURE,
 } from './httpBlogTypes';
 
 // Get Actions
@@ -137,6 +139,37 @@ export const postBlog = (payload) => {
 export const postBlogFailure = (error) => {
   return {
     type: POST_BLOG_FAILURE,
+    payload: error,
+  };
+};
+
+// Post likes Action
+export const postLikeRequest = (postData) => {
+  // const convertedData = JSON.stringify(postData);
+  console.log(postData.likes);
+  return (dispatch) => {
+    axios
+      .put('http://localhost/reactBlogApi/addLike.php', postData)
+      .then(() => {
+        dispatch(postLike(1));
+        dispatch(getBlogsRequest()); // Get the added blog post
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorMsg = err.message;
+        dispatch(postBlogFailure(errorMsg));
+      });
+  };
+};
+export const postLike = (payload) => {
+  return {
+    type: POST_LIKE_SUCCESS,
+    payload: payload,
+  };
+};
+export const postLikeFailure = (error) => {
+  return {
+    type: POST_LIKE_FAILURE,
     payload: error,
   };
 };

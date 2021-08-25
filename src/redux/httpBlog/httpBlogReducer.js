@@ -8,12 +8,15 @@ import {
   PUT_BLOG_FAILURE,
   POST_BLOG_SUCCESS,
   POST_BLOG_FAILURE,
+  POST_LIKE_SUCCESS,
+  POST_LIKE_FAILURE,
 } from './httpBlogTypes';
 
 const initialState = {
   loading: false,
   blogs: [],
   errors: '',
+  likes: null,
 };
 
 export const getReducer = (state = initialState, action) => {
@@ -100,6 +103,24 @@ export const postReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         blog: [],
+        errors: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const postLikeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case POST_LIKE_SUCCESS:
+      return {
+        ...state,
+        likes: action.payload,
+      };
+    case POST_LIKE_FAILURE:
+      return {
+        ...state,
         errors: action.payload,
       };
 
