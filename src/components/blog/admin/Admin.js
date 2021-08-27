@@ -12,7 +12,6 @@ function Admin({
   getBlogsRequest,
   putBlogRequest,
   deleteBlogRequest,
-
   userData,
 }) {
   const [displayForm, setDisplayForm] = useState(false);
@@ -24,7 +23,6 @@ function Admin({
   const [message, setMessage] = useState('');
   const [showFormId, setShowFormId] = useState('');
   const [showDeleteId, setShowDeleteId] = useState('');
-
   const [uuid, setUuid] = useState('');
 
   useEffect(() => {
@@ -80,7 +78,6 @@ function Admin({
       <BlogPostForm />
 
       <div>
-        {console.log(uuid)}
         {blogs.blogs &&
           blogs.blogs.map((blog) =>
             blog.uuid === uuid ||
@@ -101,6 +98,11 @@ function Admin({
                     <div className="userDetails">User: {blog.name}</div>
                   )}
                 </div>
+                {blog.admin === '1' ? (
+                  <div className="adminMessage">
+                    <i className="fas fa-exclamation"></i> Edited by Admin
+                  </div>
+                ) : null}
 
                 <div>
                   {!displayForm ? (
