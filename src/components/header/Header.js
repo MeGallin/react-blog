@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import LogoutButton from '../logoutButton/LogoutButton';
 
 function Header(isAuthorized) {
+  const [uuid, setUuid] = useState('');
+  useEffect(() => {
+    if (
+      isAuthorized.isAuthorized &&
+      isAuthorized.isAuthorized.userData.length !== 0
+    ) {
+      setUuid(isAuthorized.isAuthorized.userData[0].uuid);
+    }
+  }, [isAuthorized]);
   return (
     <header>
       <nav>
@@ -13,7 +22,9 @@ function Header(isAuthorized) {
           {isAuthorized.isAuthorized.isAuthorized ? (
             <span>
               <Link to="/admin">Admin</Link>
-              <Link to="/register">Register</Link>
+              {uuid === 'fc6b6bfa-55a1-45df-85cb-8636092988b8' ? (
+                <Link to="/register">Register</Link>
+              ) : null}
             </span>
           ) : null}
 

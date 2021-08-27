@@ -71,6 +71,12 @@ function HomeBlog({
                 <p dangerouslySetInnerHTML={{ __html: blog.message }} />
                 <p>{blog.posted}</p>
                 <p>{blog.name}</p>
+
+                {blog.admin === '1' ? (
+                  <div className="adminMessage">
+                    <i className="fas fa-exclamation"></i> Edited by Admin
+                  </div>
+                ) : null}
                 <div className="clap-wrapper">
                   <div>
                     <span

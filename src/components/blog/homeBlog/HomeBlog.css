@@ -18,3 +18,9 @@
 .fa-thumbs-down:hover {
   color: crimson;
 }
+.adminMessage {
+  font-size: 0.6rem;
+  color: var(--secondary-bg-colour);
+  text-transform: uppercase;
+  font-weight: bold;
+}
