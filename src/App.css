@@ -8,6 +8,8 @@
   --burnt-orange: rgba(190, 79, 12, 1);
   --main-font-colour: whitesmoke;
   --border-colour: rgba(200, 200, 200, 0.5);
+  --header-height: 60px;
+  --footer-height: 28px;
 }
 
 /* Box sizing rules */
@@ -130,7 +132,7 @@ section {
   max-width: 1290px;
   width: 100%;
   margin: 0px auto;
-  height: calc(100vh - 60px);
+  height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: auto;
 }
 
