@@ -8,6 +8,8 @@
   --burnt-orange: rgba(190, 79, 12, 1);
   --main-font-colour: whitesmoke;
   --border-colour: rgba(200, 200, 200, 0.5);
+  --header-height: 60px;
+  --footer-height: 28px;
 }
 
 /* Box sizing rules */
@@ -57,6 +59,7 @@ body {
   font-size: 16px;
   margin: 0;
   padding: 0.1em;
+  overflow: hidden;
 }
 body p {
   font-size: 14px;
@@ -117,22 +120,20 @@ h6 {
 
 /* General global stye settings */
 
-body {
-  display: flex;
-  min-height: 100%;
-}
 #app-wrapper {
   flex: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   min-height: 100%;
-  min-width: 99vw;
+  min-width: 100%;
 }
 section {
   max-width: 1290px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0px auto;
+  height: calc(100vh - var(--header-height) - var(--footer-height));
+  overflow: auto;
 }
 
 footer {
@@ -177,6 +178,7 @@ form label {
 form input[type='text'],
 form input[type='email'],
 form input[type='password'],
+input[type='search'],
 form textarea {
   background: rgba(255, 255, 255, 0.1);
   border: none;
@@ -194,7 +196,6 @@ form textarea {
   color: #8a97a0;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
-  margin-bottom: 30px;
 }
 form input[type='text'].entered {
   border-left: greenyellow 4px solid;
@@ -215,6 +216,12 @@ form input[type='password'].entered {
   border-left: greenyellow 4px solid;
 }
 form input[type='password'].invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+input[type='search'].entered {
+  border-left: greenyellow 4px solid;
+}
+input[type='search'].invalid {
   border-left: var(--secondary-bg-colour) 4px solid;
 }
 form textarea.invalid {
@@ -251,7 +258,16 @@ fieldset.fieldSet {
   background: var(--border-colour);
 }
 /* SCROLL-BAR CUSTOM STYLING */
-
+hr {
+  border: 0;
+  height: 4px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
 /* Home page blog view images */
 .img-fit {
   max-height: 30%;

@@ -1,3 +1,8 @@
 footer {
   background-color: green;
+  position: sticky;
+  bottom: 0;
+  z-index: 100;
+  margin-top: auto;
+  height: var(--footer-height);
 }

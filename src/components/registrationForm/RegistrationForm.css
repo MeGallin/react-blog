@@ -1,0 +1,11 @@
+.failedLoginMessage {
+  color: crimson;
+  padding: 0.2em;
+  font-weight: bold;
+}
+
+.registeredMessage {
+  color: greenyellow;
+  padding: 0.2em;
+  font-weight: bold;
+}
