@@ -7,6 +7,7 @@ import {
 } from '../../../redux';
 import './HomeBlog.css';
 import SearchInput from '../../searchInput/SearchInput';
+import moment from 'moment';
 
 function HomeBlog({
   blogs,
@@ -21,6 +22,10 @@ function HomeBlog({
   useEffect(() => {
     getBlogsRequest();
   }, [getBlogsRequest]);
+
+  const timeStamp = (date, format) => {
+    return moment(date, format).fromNow();
+  };
 
   const filteredBlogs = blogs.blogs.filter((blog) => {
     return blog.heading.toLowerCase().includes(searchField.toLowerCase());
@@ -80,7 +85,7 @@ function HomeBlog({
         <div className="modal__wrapper">
           <h3>{modalData.heading}</h3>
           <p dangerouslySetInnerHTML={{ __html: modalData.message }} />
-          <p>{modalData.posted}</p>
+          <p>{timeStamp(modalData.posted, 'YYYYMMDD, h:mm:ss a')}</p>
           <p>{modalData.name}</p>
           <div className="clap-wrapper">
             <div>
