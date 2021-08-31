@@ -15,8 +15,7 @@ function LogoutButton({ loginRequest, userData }) {
   };
   return (
     <React.Fragment>
-      <div>
-        {userData.isAuthorized ? 'YES' : 'NO'}
+      <div className="logout-button-wrapper">
         <button onClick={handleLogout}>logout</button>
         <div className="userDetails">User: {name}</div>
       </div>
