@@ -129,11 +129,12 @@ h6 {
   min-width: 100%;
 }
 section {
-  max-width: 1290px;
+  /* max-width: 1290px; */
   width: 100%;
   margin: 0px auto;
   height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: auto;
+  padding: 0px 1rem;
 }
 
 footer {
