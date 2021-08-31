@@ -66,6 +66,10 @@
   }
 }
 /* Modal styling END */
+.blog-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
 .text-wrapper {
   display: flex;
   align-items: baseline;
@@ -79,4 +83,8 @@
 .read-more:hover {
   color: var(--secondary-bg-colour);
   opacity: 1;
+}
+.search {
+  color: greenYellow;
+  background-color: rgba(51, 51, 51, 1);
 }
