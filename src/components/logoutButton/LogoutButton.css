@@ -1,3 +1,7 @@
+.logout-button-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 .userDetails {
   color: var(--secondary-bg-colour);
   font-weight: bold;
