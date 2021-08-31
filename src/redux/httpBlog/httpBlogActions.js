@@ -176,7 +176,6 @@ export const postLikeFailure = (error) => {
 
 // POST DIS-LIKES
 export const postDisLikeRequest = (postData) => {
-  console.log(postData.dislikes);
   return (dispatch) => {
     axios
       .put('http://localhost/reactBlogApi/addDisLike.php', postData)

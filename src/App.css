@@ -272,3 +272,8 @@ hr {
 .img-fit {
   max-height: 30%;
 }
+
+/* General helper classes */
+.border-temp {
+  border: 4px solid yellowgreen;
+}
