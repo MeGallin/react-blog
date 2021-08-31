@@ -84,6 +84,9 @@
   color: var(--secondary-bg-colour);
   opacity: 1;
 }
+.search-title {
+  cursor: pointer;
+}
 .search {
   color: greenYellow;
   background-color: rgba(51, 51, 51, 1);

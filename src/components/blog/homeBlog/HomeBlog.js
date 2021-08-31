@@ -170,6 +170,8 @@ function HomeBlog({
             <React.Fragment key={blog.id}>
               <div>
                 <h1
+                  className="search-title"
+                  onClick={() => handleViewBlog(index)}
                   dangerouslySetInnerHTML={{ __html: matchName(blog.heading) }}
                 />
 
