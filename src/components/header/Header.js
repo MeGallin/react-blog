@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Header.css';
 import LogoutButton from '../logoutButton/LogoutButton';
 
@@ -18,17 +18,25 @@ function Header(isAuthorized) {
     <header>
       <nav>
         <div>
-          <Link to="/">Home</Link>
+          <NavLink exact={true} to="/" activeClassName="is-active">
+            Home
+          </NavLink>
           {isAuthorized.isAuthorized.isAuthorized ? (
             <span>
-              <Link to="/admin">Admin</Link>
+              <NavLink to="/admin" activeClassName="is-active">
+                Admin
+              </NavLink>
               {uuid === 'fc6b6bfa-55a1-45df-85cb-8636092988b8' ? (
-                <Link to="/register">Register</Link>
+                <NavLink to="/register" activeClassName="is-active">
+                  Register
+                </NavLink>
               ) : null}
             </span>
           ) : null}
 
-          <Link to="/about">About</Link>
+          <NavLink to="/about" activeClassName="is-active">
+            About
+          </NavLink>
         </div>
 
         <div>
@@ -38,7 +46,9 @@ function Header(isAuthorized) {
             </div>
           ) : (
             <button>
-              <Link to="/login">Login</Link>
+              <NavLink to="/login" activeClassName="is-active">
+                Login
+              </NavLink>
             </button>
           )}
         </div>
