@@ -6,6 +6,7 @@ const SearchInput = ({
   placeholder,
   handleSearch,
   className,
+  value,
   ...props
 }) => {
   return (
@@ -15,6 +16,7 @@ const SearchInput = ({
         className={className}
         placeholder={placeholder}
         onChange={handleSearch}
+        value={value}
       ></input>
     </div>
   );

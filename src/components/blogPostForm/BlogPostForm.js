@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { postBlogRequest } from '../../redux';
 import './BlogPostForm.css';
 import FormInputs from '../formInputs/FormInputs';
+import QuillEditor from '../quillEditor/QuillEditor';
 
 function BlogPostForm({ blog, userData, postBlogRequest }) {
   const [legend] = useState('Post Blog');
@@ -10,6 +11,7 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
+  const [textEditor, setTextEditor] = useState(false);
 
   useEffect(() => {
     if (userData.isAuthorized && userData.userData.length !== 0) {
@@ -50,7 +52,6 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
             name="uuid"
             className={!uuid ? 'invalid' : 'entered'}
           />
-
           <FormInputs
             readOnly
             label="Name"
@@ -60,7 +61,6 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
             name="name"
             className={!name ? 'invalid' : 'entered'}
           />
-
           <FormInputs
             label="Heading"
             value={heading}
@@ -69,17 +69,44 @@ function BlogPostForm({ blog, userData, postBlogRequest }) {
             name="heading"
             className={!heading.length ? 'invalid' : 'entered'}
           />
-          <label htmlFor="message">
-            Blog
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              type="text"
-              name="message"
-              className={message.length < 10 ? 'invalid' : 'entered'}
-            />
-          </label>
-          <button type="submit" value="submit">
+          <div>
+            <label htmlFor="textEditor">
+              Show text Editor
+              <input
+                checked={textEditor}
+                onChange={() => setTextEditor(!textEditor)}
+                type="checkbox"
+                name="textEditor"
+              />
+            </label>
+          </div>
+
+          {textEditor ? (
+            <label htmlFor="message">
+              Blog
+              <QuillEditor
+                value={message}
+                onChange={setMessage}
+                className={message.length < 10 ? 'invalid' : 'entered'}
+              />
+            </label>
+          ) : (
+            <label htmlFor="message">
+              Blog
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                type="text"
+                name="message"
+                className={message.length < 10 ? 'invalid' : 'entered'}
+              />
+            </label>
+          )}
+          <button
+            type="submit"
+            value="submit"
+            disabled={!heading || message.length < 10}
+          >
             Submit
           </button>
         </form>

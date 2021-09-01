@@ -129,11 +129,12 @@ h6 {
   min-width: 100%;
 }
 section {
-  max-width: 1290px;
+  /* max-width: 1290px; */
   width: 100%;
   margin: 0px auto;
   height: calc(100vh - var(--header-height) - var(--footer-height));
   overflow: auto;
+  padding: 0px 1rem;
 }
 
 footer {
@@ -228,14 +229,18 @@ form textarea.invalid {
   border-left: var(--secondary-bg-colour) 4px solid;
   min-height: 250px;
 }
+
 form textarea {
   min-height: 250px;
 }
-.text-editor.entered {
-  border-left: greenyellow 4px solid;
-}
-.text-editor.invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+input[type='checkbox'] {
+  /* change "blue" browser chrome to yellow */
+  filter: invert(100%) hue-rotate(53deg) brightness(1.3);
+  width: 18px;
+  height: 20px;
+  margin-left: 0.5rem;
+  position: relative;
+  top: 5px;
 }
 
 /* Fieldset for all the forms */

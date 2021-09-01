@@ -19,6 +19,7 @@ function HomeBlog({
   const [searchField, setSearchField] = useState('');
   const [showFullBlog, setShowFullBlog] = useState(false);
   const [modalData, setModalData] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     getBlogsRequest();
@@ -74,6 +75,18 @@ function HomeBlog({
   };
   const handleCloseViewBlog = () => {
     setShowFullBlog(false);
+  };
+  const matchName = (current) => {
+    let reggie = new RegExp(searchField, 'ig');
+    let found = current.search(reggie) !== -1;
+    return !found
+      ? current
+      : current.replace(
+          reggie,
+          '<span style="color:greenYellow; background-color:rgba(51,51,51,1)" >' +
+            searchField +
+            '</span>',
+        );
   };
 
   return blogs.loading ? (
@@ -138,9 +151,19 @@ function HomeBlog({
         <SearchInput
           type="search"
           placeholder="Search a Title..."
-          handleSearch={(e) => setSearchField(e.target.value)}
+          handleSearch={(e) =>
+            setSearchField(e.target.value, setIsDisabled(false))
+          }
           className={searchField.length < 3 ? 'invalid' : 'entered'}
+          value={searchField}
         />
+        <p></p>
+        <button
+          onClick={() => setSearchField('', setIsDisabled(true))}
+          disabled={isDisabled}
+        >
+          Clear Search
+        </button>
         <hr />
 
         {filteredBlogs &&
@@ -148,19 +171,27 @@ function HomeBlog({
           filteredBlogs.map((blog, index) => (
             <React.Fragment key={blog.id}>
               <div>
-                <h1>{blog.heading}</h1>
-                <div className="text-wrapper">
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: blog.message.slice(0, 80) + '...',
-                    }}
-                  ></p>
-                  <span
-                    onClick={() => handleViewBlog(index)}
-                    className="read-more"
-                  >
-                    read more...
-                  </span>
+                <h1
+                  className="search-title"
+                  onClick={() => handleViewBlog(index)}
+                  dangerouslySetInnerHTML={{ __html: matchName(blog.heading) }}
+                />
+
+                <div className="blog-content-wrapper">
+                  <div className="text-wrapper">
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: blog.message.slice(0, 200) + '...',
+                      }}
+                    ></p>
+                    <span
+                      onClick={() => handleViewBlog(index)}
+                      className="read-more"
+                    >
+                      read more...
+                    </span>
+                  </div>
+                  <p>POST BY: {blog.name}</p>
                 </div>
                 {blog.admin === '1' ? (
                   <div className="adminMessage">

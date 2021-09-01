@@ -1,0 +1,11 @@
+.quill {
+  background-color: var(--main-font-colour);
+  color: var(--main-bg-colour);
+  min-height: 250px;
+}
+.quill.invalid {
+  border-left: var(--secondary-bg-colour) 4px solid;
+}
+.quill.entered {
+  border-left: greenyellow 4px solid;
+}
