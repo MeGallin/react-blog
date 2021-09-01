@@ -1,8 +1,14 @@
 footer {
-  background-color: green;
+  background-color: var(--main-font-colour);
+  color: var(--main-bg-colour);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: sticky;
   bottom: 0;
   z-index: 100;
   margin-top: auto;
   height: var(--footer-height);
+  padding: 0.2rem 0.2em;
+  font-size: 0.6em;
 }
