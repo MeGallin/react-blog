@@ -18,6 +18,7 @@ function Admin({
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [legend] = useState('Post Blog');
   const [admin, setAdmin] = useState(0);
+
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
@@ -141,7 +142,6 @@ function Admin({
                               className={!uuid ? 'invalid' : 'entered'}
                             />
                           </div>
-
                           <div>
                             <FormInputs
                               readOnly
@@ -181,6 +181,7 @@ function Admin({
                               />
                             </label>
                           </div>
+
                           <div>
                             <label htmlFor="message">
                               Blog
