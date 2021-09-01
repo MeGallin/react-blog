@@ -12,3 +12,6 @@ footer {
   padding: 0.2rem 0.2em;
   font-size: 0.6em;
 }
+footer button {
+  font-size: 1.5em;
+}

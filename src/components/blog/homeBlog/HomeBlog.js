@@ -8,6 +8,7 @@ import {
 import './HomeBlog.css';
 import SearchInput from '../../searchInput/SearchInput';
 import moment from 'moment';
+import Modal from '../../modal/Modal';
 
 function HomeBlog({
   blogs,
@@ -96,6 +97,7 @@ function HomeBlog({
     <div>
       {showFullBlog ? (
         <div className="modal__wrapper">
+          <Modal handleCloseViewBlog />
           <h3>{modalData.heading}</h3>
           <p dangerouslySetInnerHTML={{ __html: modalData.message }} />
           <p>{timeStamp(modalData.posted, 'YYYYMMDD, h:mm:ss a')}</p>
