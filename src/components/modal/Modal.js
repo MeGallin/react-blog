@@ -1,17 +1,36 @@
-import React from 'react';
-import './Modal.scss';
+import React, { useState } from 'react';
+import './Modal.css';
 
-function Modal() {
+function Modal({ header, content, footer, name, title, ...props }) {
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
   return (
     <React.Fragment>
-      <div className="modal-wrapper">
-        <div>Modal Header</div>
-        <div>Modal Content</div>
+      {showModal ? (
         <div>
-          Modal footer
-          <button>X</button>
+          <div
+            className={showModal ? 'modal-overlay' : null}
+            onClick={() => setShowModal(false)}
+          ></div>
+
+          <div header={header} className="modal-wrapper">
+            <h1>{header}</h1>
+            <div content={content}>
+              <div>{content}</div>
+            </div>
+            <div footer={footer}>
+              <div>{footer}</div>
+            </div>
+            <button onClick={() => setShowModal(false)}>Close</button>
+          </div>
         </div>
-      </div>
+      ) : null}
+
+      <button type="button" onClick={handleShowModal} className="modal-btn">
+        {title}
+      </button>
     </React.Fragment>
   );
 }
