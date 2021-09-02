@@ -13,7 +13,7 @@ export const loginRequest = (userData, history) => {
       dispatch(logoutRequest());
     } else {
       axios
-        .post(process.env.REACT_APP_POST_LOGIN_FORM_URL, userData)
+        .post(process.env.REACT_APP_POST_LOGIN_FORM_URL_PROD, userData)
         .then((res) => {
           const response = res.data;
           if (response.length === 0) {

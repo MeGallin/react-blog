@@ -10,7 +10,10 @@ import { getBlogsRequest } from '../httpBlog/httpBlogActions';
 export const postRegistrationRequest = (registrationData, history) => {
   return (dispatch) => {
     axios
-      .post(process.env.REACT_APP_POST_REGISTRATION_FORM_URL, registrationData)
+      .post(
+        process.env.REACT_APP_POST_REGISTRATION_FORM_URL_PROD,
+        registrationData,
+      )
       .then((res) => {
         if (res.data.includes('email already exists') || !registrationData) {
           dispatch(existingEmail(true));

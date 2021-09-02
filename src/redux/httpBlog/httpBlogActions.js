@@ -19,13 +19,13 @@ import {
 } from './httpBlogTypes';
 
 const {
-  REACT_APP_GET_BLOGS_URL,
-  REACT_APP_DELETE_BLOG_URL,
-  REACT_APP_UPDATE_BLOG_URL,
-  REACT_APP_ADD_BLOG_URL,
-  REACT_APP_POST_LIKE_URL,
-  REACT_APP_POST_DISLIKE_URL,
-  REACT_APP_POST_CONTACT_FORM_URL,
+  REACT_APP_GET_BLOGS_URL_PROD,
+  REACT_APP_DELETE_BLOG_URL_PROD,
+  REACT_APP_UPDATE_BLOG_URL_PROD,
+  REACT_APP_ADD_BLOG_URL_PROD,
+  REACT_APP_POST_LIKE_URL_PROD,
+  REACT_APP_POST_DISLIKE_URL_PROD,
+  REACT_APP_POST_CONTACT_FORM_URL_PROD,
 } = process.env;
 
 // Get Actions
@@ -33,7 +33,7 @@ export const getBlogsRequest = () => {
   return (dispatch) => {
     dispatch(getBlogs);
     axios
-      .get(REACT_APP_GET_BLOGS_URL)
+      .get(REACT_APP_GET_BLOGS_URL_PROD)
       .then((res) => {
         const blogs = res.data;
         dispatch(getBlogsSuccess(blogs));
@@ -70,7 +70,7 @@ export const getBlogsFailure = (error) => {
 export const deleteBlogRequest = (id) => {
   return (dispatch) => {
     axios
-      .delete(REACT_APP_DELETE_BLOG_URL + id)
+      .delete(REACT_APP_DELETE_BLOG_URL_PROD + id)
       .then(() => {
         dispatch(deleteBlog(id));
         dispatch(getBlogsRequest()); // Get the added blog post
@@ -100,7 +100,7 @@ export const deleteBlogFailure = (error) => {
 export const putBlogRequest = (putData) => {
   return (dispatch) => {
     axios
-      .put(REACT_APP_UPDATE_BLOG_URL, putData)
+      .put(REACT_APP_UPDATE_BLOG_URL_PROD, putData)
       .then(() => {
         dispatch(putBlog(putData));
         dispatch(getBlogsRequest()); // Get the added blog post
@@ -131,7 +131,7 @@ export const putBlogFailure = (error) => {
 export const postBlogRequest = (postData) => {
   return (dispatch) => {
     axios
-      .post(REACT_APP_ADD_BLOG_URL, postData)
+      .post(REACT_APP_ADD_BLOG_URL_PROD, postData)
       .then(() => {
         dispatch(postBlog(postData));
         dispatch(getBlogsRequest()); // Get the added blog post
@@ -162,7 +162,7 @@ export const postBlogFailure = (error) => {
 export const postLikeRequest = (postData) => {
   return (dispatch) => {
     axios
-      .put(REACT_APP_POST_LIKE_URL, postData)
+      .put(REACT_APP_POST_LIKE_URL_PROD, postData)
       .then(() => {
         dispatch(postLike(postData.likes));
         dispatch(getBlogsRequest()); // Get the added blog post
@@ -191,7 +191,7 @@ export const postLikeFailure = (error) => {
 export const postDisLikeRequest = (postData) => {
   return (dispatch) => {
     axios
-      .put(REACT_APP_POST_DISLIKE_URL, postData)
+      .put(REACT_APP_POST_DISLIKE_URL_PROD, postData)
       .then(() => {
         dispatch(postDisLike(postData.dislikes));
         dispatch(getBlogsRequest()); // Get the added blog post
@@ -219,7 +219,7 @@ export const postDisLikeFailure = (error) => {
 export const postContactFormRequest = (postData) => {
   return (dispatch) => {
     axios
-      .post(REACT_APP_POST_CONTACT_FORM_URL, postData)
+      .post(REACT_APP_POST_CONTACT_FORM_URL_PROD, postData)
       .then(() => {
         dispatch(postContactFormSuccess(postData));
       })
