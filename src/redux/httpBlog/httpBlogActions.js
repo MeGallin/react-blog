@@ -13,6 +13,8 @@ import {
   POST_LIKE_FAILURE,
   POST_DIS_LIKE_SUCCESS,
   POST_DIS_LIKE_FAILURE,
+  POST_CONTACT_FORM_SUCCESS,
+  POST_CONTACT_FORM_FAILURE,
 } from './httpBlogTypes';
 
 // Get Actions
@@ -199,6 +201,34 @@ export const postDisLike = (payload) => {
 export const postDisLikeFailure = (error) => {
   return {
     type: POST_DIS_LIKE_FAILURE,
+    payload: error,
+  };
+};
+// POST Contact form data
+export const postContactFormRequest = (postData) => {
+  return (dispatch) => {
+    axios
+      .put('http://localhost/reactBlogApi/sendMe.php', postData)
+      .then(() => {
+        dispatch(postContactFormSuccess(postData));
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorMsg = err.message;
+        dispatch(postContactFormFailure(errorMsg));
+      });
+  };
+};
+
+export const postContactFormSuccess = (payload) => {
+  return {
+    type: POST_CONTACT_FORM_SUCCESS,
+    payload: payload,
+  };
+};
+export const postContactFormFailure = (error) => {
+  return {
+    type: POST_CONTACT_FORM_FAILURE,
     payload: error,
   };
 };

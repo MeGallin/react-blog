@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import './ContactForm.css';
 import FormInputs from '../formInputs/FormInputs';
+import { connect } from 'react-redux';
+import { postContactFormRequest } from '../../redux';
 
 const nameRegEx = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{2,}$/;
 const emailRegEx =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
-function ContactForm() {
+function ContactForm({ postContactFormRequest }) {
   const [legend] = useState('Contact form');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +21,11 @@ function ContactForm() {
       email,
       message,
     };
-    console.log(data);
+
+    postContactFormRequest(data);
+    setName('');
+    setEmail('');
+    setMessage('');
   };
 
   return (
@@ -90,4 +96,11 @@ function ContactForm() {
   );
 }
 
-export default ContactForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postContactFormRequest: (formData) =>
+      dispatch(postContactFormRequest(formData)),
+  };
+};
+
+export default connect('', mapDispatchToProps)(ContactForm);

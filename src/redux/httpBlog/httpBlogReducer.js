@@ -12,6 +12,8 @@ import {
   POST_LIKE_FAILURE,
   POST_DIS_LIKE_SUCCESS,
   POST_DIS_LIKE_FAILURE,
+  POST_CONTACT_FORM_SUCCESS,
+  POST_CONTACT_FORM_FAILURE,
 } from './httpBlogTypes';
 
 const initialState = {
@@ -98,14 +100,14 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        payload: action.payload,
+
         errors: '',
       };
     case POST_BLOG_FAILURE:
       return {
         ...state,
         loading: false,
-        blog: [],
+
         errors: action.payload,
       };
 
@@ -142,6 +144,27 @@ export const postDisLikeReducer = (state = initialState, action) => {
     case POST_DIS_LIKE_FAILURE:
       return {
         ...state,
+        errors: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+// Contact me form data
+export const postContactFormReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case POST_CONTACT_FORM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        errors: '',
+      };
+    case POST_CONTACT_FORM_FAILURE:
+      return {
+        ...state,
+        loading: false,
         errors: action.payload,
       };
 
