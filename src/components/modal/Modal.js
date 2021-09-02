@@ -11,19 +11,25 @@ function Modal({ header, content, footer, name, title, ...props }) {
       {showModal ? (
         <div>
           <div
+            title="Close modal"
             className={showModal ? 'modal-overlay' : null}
             onClick={() => setShowModal(false)}
-          ></div>
+          />
+          <div className="modal-wrapper">
+            <div className="modal-content-wrapper">
+              <div header={header} className="modal-header">
+                <div>{header}</div>
+              </div>
 
-          <div header={header} className="modal-wrapper">
-            <h1>{header}</h1>
-            <div content={content}>
-              <div>{content}</div>
+              <div content={content} className="modal-content">
+                <div>{content}</div>
+              </div>
+
+              <div footer={footer} className="modal-footer">
+                <div>{footer}</div>
+              </div>
+              <button onClick={() => setShowModal(false)}>Close</button>
             </div>
-            <div footer={footer}>
-              <div>{footer}</div>
-            </div>
-            <button onClick={() => setShowModal(false)}>Close</button>
           </div>
         </div>
       ) : null}
