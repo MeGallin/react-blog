@@ -100,14 +100,12 @@ export const postReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-
         errors: '',
       };
     case POST_BLOG_FAILURE:
       return {
         ...state,
         loading: false,
-
         errors: action.payload,
       };
 
