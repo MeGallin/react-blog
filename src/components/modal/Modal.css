@@ -36,10 +36,36 @@
   }
 }
 /* Modal styling END */
+.modal-content-wrapper {
+  /* border: 1px solid blue; */
+  height: auto;
+}
+.modal-header {
+  /* border: 1px solid red; */
+}
+.modal-content {
+  /* border: 1px solid yellow; */
+}
+.modal-footer {
+  /* border: 1px solid red;
+  background-color: var(--main-font-colour);
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  height: var(--footer-height); */
+}
+
 .modal-btn {
   display: flex;
   align-items: baseline;
+  opacity: 0.6;
+  cursor: pointer;
+  margin: 0.6rem 0;
 }
+.modal-btn:hover {
+  opacity: 1;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -48,4 +74,5 @@
   height: 100%;
   z-index: 50;
   background: rgba(51, 51, 51, 0.85);
+  cursor: pointer;
 }
