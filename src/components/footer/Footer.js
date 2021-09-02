@@ -2,16 +2,16 @@ import React from 'react';
 import DateTime from '../dateTime/DateTime';
 import Modal from '../modal/Modal';
 import './Footer.css';
+import ContactForm from '../contactForm/ContactForm';
 
-const headerContent = () => {
-  return <div>Contact form</div>;
-};
 const modalContent = () => {
-  return <p>Contact form to follow</p>;
+  return (
+    <React.Fragment>
+      <ContactForm />
+    </React.Fragment>
+  );
 };
-const footerContent = () => {
-  return <p>Footer Content</p>;
-};
+
 const buttonLabel = () => {
   return <span>Contact Us</span>;
 };
@@ -19,12 +19,7 @@ const buttonLabel = () => {
 function Footer() {
   return (
     <footer>
-      <Modal
-        header={headerContent()}
-        content={modalContent()}
-        footer={footerContent()}
-        title={buttonLabel()}
-      />
+      <Modal content={modalContent()} title={buttonLabel()} />
       <DateTime />
     </footer>
   );
