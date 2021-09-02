@@ -30,7 +30,6 @@ const {
 
 // Get Actions
 export const getBlogsRequest = () => {
-  console.log(process.env);
   return (dispatch) => {
     dispatch(getBlogs);
     axios
