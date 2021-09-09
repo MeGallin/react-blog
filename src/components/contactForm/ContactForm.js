@@ -4,7 +4,7 @@ import FormInputs from '../formInputs/FormInputs';
 import { connect } from 'react-redux';
 import { postContactFormRequest } from '../../redux';
 
-const nameRegEx = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{2,}$/;
+const nameRegEx = /^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
 const emailRegEx =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -13,6 +13,8 @@ function ContactForm({ postContactFormRequest }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [thankYou, setThankYou] = useState(false);
+  const [tempName, setTempName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,17 +23,28 @@ function ContactForm({ postContactFormRequest }) {
       email,
       message,
     };
-
     postContactFormRequest(data);
     setName('');
     setEmail('');
     setMessage('');
+    setTempName(name);
+
+    setThankYou(true);
+    setTimeout(() => {
+      setThankYou(false);
+      setTempName('');
+    }, 6000);
   };
 
   return (
     <React.Fragment>
+      {thankYou ? (
+        <div className="contact-form">
+          Thanks {tempName} for reaching out. We will be in contact shortly.
+        </div>
+      ) : null}
       <fieldset className="fieldSet">
-        <legend>{legend}</legend>
+        <legend className="contact-form">{legend}</legend>
         <form onSubmit={handleSubmit}>
           <div></div>
           <div>
@@ -69,7 +82,7 @@ function ContactForm({ postContactFormRequest }) {
 
           <div>
             <label htmlFor="message">
-              Blog
+              Message
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

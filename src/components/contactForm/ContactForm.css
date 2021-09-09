@@ -1,0 +1,7 @@
+.contact-form {
+  color: var(--main-font-colour);
+  font-size: 1.4em;
+}
+.contact-form button {
+  border: red 5px solid;
+}

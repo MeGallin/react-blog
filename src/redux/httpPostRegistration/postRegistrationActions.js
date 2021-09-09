@@ -4,6 +4,8 @@ import {
   POST_REGISTRATION_FAILURE,
   POST_REGISTRATION_EXISTING_EMAIL,
   POST_REGISTRATION_CONFIRMATION,
+  POST_REGISTRATION_CONFIRMATION_EMAIL,
+  POST_REGISTRATION_CONFIRMATION_EMAIL_FAILURE,
 } from './postRegistrationTypes';
 import { getBlogsRequest } from '../httpBlog/httpBlogActions';
 
@@ -37,6 +39,21 @@ export const postRegistrationRequest = (registrationData, history) => {
   };
 };
 
+export const postRegistrationEmail = (registrationData) => {
+  return (dispatch) => {
+    axios
+      .post(process.env.REACT_APP_POST_REGISTRATION_EMAIL_URL, registrationData)
+      .then(() => {
+        dispatch(registrationEmail(registrationData));
+      })
+      .catch((err) => {
+        console.log(err);
+        const errorMsg = err.message;
+        dispatch(registrationEmailFailure(errorMsg));
+      });
+  };
+};
+
 export const postBlog = (payload) => {
   return {
     type: POST_REGISTRATION_SUCCESS,
@@ -62,5 +79,19 @@ export const registrationConfirmation = (payload) => {
   return {
     type: POST_REGISTRATION_CONFIRMATION,
     payload: payload,
+  };
+};
+
+export const registrationEmail = (payload) => {
+  return {
+    type: POST_REGISTRATION_CONFIRMATION_EMAIL,
+    payload: payload,
+  };
+};
+
+export const registrationEmailFailure = (error) => {
+  return {
+    type: POST_REGISTRATION_CONFIRMATION_EMAIL_FAILURE,
+    payload: error,
   };
 };
