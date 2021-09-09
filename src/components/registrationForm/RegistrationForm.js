@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { postRegistrationRequest } from '../../redux';
+import { postRegistrationRequest, postRegistrationEmail } from '../../redux';
 import './RegistrationForm.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
@@ -11,7 +11,11 @@ const emailRegEx =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 const pwdRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
 
-function RegistrationForm({ registration, postRegistrationRequest }) {
+function RegistrationForm({
+  registration,
+  postRegistrationRequest,
+  postRegistrationEmail,
+}) {
   const history = useHistory();
   const [legend] = useState('Registration Form');
   const [emailExistsMessage, setEmailExistsMessage] = useState('');
@@ -32,6 +36,7 @@ function RegistrationForm({ registration, postRegistrationRequest }) {
       uuid: uuid,
     };
     postRegistrationRequest(formData, history);
+    postRegistrationEmail(formData);
     if (registration.existingEmailMessage) {
       setName('');
       setSurname('');
@@ -140,6 +145,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     postRegistrationRequest: (formData, history) =>
       dispatch(postRegistrationRequest(formData, history)),
+    postRegistrationEmail: (formData) =>
+      dispatch(postRegistrationEmail(formData)),
   };
 };
 
