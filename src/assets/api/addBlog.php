@@ -28,8 +28,7 @@ if(isset($postdata) && !empty($postdata))
       'uuid' => $uuid,
       'name' => $name,
       'heading' => $heading,
-      'message' => $message,
-      'admin' => $admin
+      'message' => $message
     ];
     echo json_encode($message);
   }

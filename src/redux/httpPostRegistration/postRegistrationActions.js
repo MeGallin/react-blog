@@ -42,7 +42,10 @@ export const postRegistrationRequest = (registrationData, history) => {
 export const postRegistrationEmail = (registrationData) => {
   return (dispatch) => {
     axios
-      .post(process.env.REACT_APP_POST_REGISTRATION_EMAIL_URL, registrationData)
+      .post(
+        process.env.REACT_APP_POST_REGISTRATION_EMAIL_URL_PROD,
+        registrationData,
+      )
       .then(() => {
         dispatch(registrationEmail(registrationData));
       })
