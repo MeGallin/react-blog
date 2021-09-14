@@ -29,19 +29,26 @@ const {
 } = process.env;
 
 // Get Actions
-export const getBlogsRequest = () => {
+export const getBlogsRequest = (data) => {
   return (dispatch) => {
-    dispatch(getBlogs);
+    const cancelGetBlogRequest = data;
     axios
-      .get(REACT_APP_GET_BLOGS_URL)
+      .get(REACT_APP_GET_BLOGS_URL, {
+        signal: cancelGetBlogRequest.signal,
+      })
       .then((res) => {
         const blogs = res.data;
         dispatch(getBlogsSuccess(blogs));
       })
       .catch((err) => {
-        console.log(err);
-        const errorMsg = err.message;
-        dispatch(getBlogsFailure(errorMsg));
+        if (err.name === 'AbortError') {
+          console.log('FETCH ABORTED', err);
+          const errorMsg = err.name;
+          dispatch(getBlogsFailure(errorMsg));
+        } else {
+          const errorMsg = err.message;
+          dispatch(getBlogsFailure(errorMsg));
+        }
       });
   };
 };
