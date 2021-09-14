@@ -4,6 +4,7 @@ import {
   getBlogsRequest,
   postLikeRequest,
   postDisLikeRequest,
+  abortConst,
 } from '../../../redux';
 import './HomeBlog.css';
 import SearchInput from '../../searchInput/SearchInput';
@@ -20,8 +21,7 @@ function HomeBlog({
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    const abortConst = new AbortController();
-    getBlogsRequest(abortConst);
+    getBlogsRequest();
     return () => {
       abortConst.abort();
     };
@@ -210,7 +210,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBlogsRequest: (data) => dispatch(getBlogsRequest(data)),
+    getBlogsRequest: () => dispatch(getBlogsRequest()),
     postLikeRequest: (data) => dispatch(postLikeRequest(data)),
     postDisLikeRequest: (data) => dispatch(postDisLikeRequest(data)),
   };
