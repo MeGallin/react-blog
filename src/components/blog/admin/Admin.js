@@ -27,7 +27,11 @@ function Admin({
   const [uuid, setUuid] = useState('');
 
   useEffect(() => {
-    getBlogsRequest();
+    const abortConst = new AbortController();
+    getBlogsRequest(abortConst);
+    return () => {
+      abortConst.abort();
+    };
   }, [getBlogsRequest]);
 
   useEffect(() => {
@@ -242,7 +246,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBlogsRequest: () => dispatch(getBlogsRequest()),
+    getBlogsRequest: (data) => dispatch(getBlogsRequest(data)),
     putBlogRequest: (formData) => dispatch(putBlogRequest(formData)),
     deleteBlogRequest: (id) => dispatch(deleteBlogRequest(id)),
   };
