@@ -17,11 +17,14 @@ function HomeBlog({
   postDisLikeRequest,
 }) {
   const [searchField, setSearchField] = useState('');
-
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    getBlogsRequest();
+    const abortConst = new AbortController();
+    getBlogsRequest(abortConst);
+    return () => {
+      abortConst.abort();
+    };
   }, [getBlogsRequest]);
 
   const timeStamp = (date, format) => {
@@ -207,7 +210,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBlogsRequest: () => dispatch(getBlogsRequest()),
+    getBlogsRequest: (data) => dispatch(getBlogsRequest(data)),
     postLikeRequest: (data) => dispatch(postLikeRequest(data)),
     postDisLikeRequest: (data) => dispatch(postDisLikeRequest(data)),
   };
