@@ -28,13 +28,15 @@ const {
   REACT_APP_POST_CONTACT_FORM_URL_PROD,
 } = process.env;
 
+// HTTP Abort
+export const abortConst = new AbortController();
+
 // Get Actions
-export const getBlogsRequest = (data) => {
+export const getBlogsRequest = () => {
   return (dispatch) => {
-    const cancelGetBlogRequest = data;
     axios
       .get(REACT_APP_GET_BLOGS_URL_PROD, {
-        signal: cancelGetBlogRequest.signal,
+        signal: abortConst.signal,
       })
       .then((res) => {
         const blogs = res.data;
