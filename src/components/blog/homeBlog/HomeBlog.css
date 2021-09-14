@@ -34,3 +34,10 @@
   color: greenYellow;
   background-color: rgba(51, 51, 51, 1);
 }
+
+.searchWrapper input[type='search'] {
+  width: min(100%, 400px);
+}
+.searchWrapper button {
+  width: min(100%, 400px);
+}
