@@ -33,7 +33,7 @@ export const getBlogsRequest = (data) => {
   return (dispatch) => {
     const cancelGetBlogRequest = data;
     axios
-      .get(REACT_APP_GET_BLOGS_URL, {
+      .get(REACT_APP_GET_BLOGS_URL_PROD, {
         signal: cancelGetBlogRequest.signal,
       })
       .then((res) => {
