@@ -33,6 +33,7 @@ export const abortConst = new AbortController();
 
 // Get Actions
 export const getBlogsRequest = () => {
+  console.log(process.env.REACT_APP_GET_BLOGS_URL_PROD);
   return (dispatch) => {
     axios
       .get(REACT_APP_GET_BLOGS_URL_PROD, {
