@@ -1,0 +1,15 @@
+@import '../../App.scss';
+
+.contact-form {
+  color: $main-font-colour;
+  font-size: 1.4em;
+}
+
+.form-wrapper {
+  color: $main-font-colour;
+  font-size: 1.4em;
+  width: 100%;
+  button {
+    width: 100%;
+  }
+}

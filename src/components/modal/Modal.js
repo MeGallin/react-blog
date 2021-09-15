@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Modal.css';
+import './Modal.scss';
 
 function Modal({ header, content, footer, name, title, ...props }) {
   const [showModal, setShowModal] = useState(false);

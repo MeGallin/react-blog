@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Admin.css';
+import './Admin.scss';
 import { connect } from 'react-redux';
 import { getBlogsRequest } from '../../../redux';
 import { putBlogRequest } from '../../../redux';

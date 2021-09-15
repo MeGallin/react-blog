@@ -1,5 +1,5 @@
 import React from 'react';
-import './FormInputs.css';
+import './FormInputs.scss';
 
 function FormInputs({
   name,
