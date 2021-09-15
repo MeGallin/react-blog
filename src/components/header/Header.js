@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import './Header.css';
+import './Header.scss';
 import LogoutButton from '../logoutButton/LogoutButton';
 
 function Header(isAuthorized) {

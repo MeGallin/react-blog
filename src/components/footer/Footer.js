@@ -1,7 +1,7 @@
 import React from 'react';
 import DateTime from '../dateTime/DateTime';
 import Modal from '../modal/Modal';
-import './Footer.css';
+import './Footer.scss';
 import ContactForm from '../contactForm/ContactForm';
 
 const modalContent = () => {

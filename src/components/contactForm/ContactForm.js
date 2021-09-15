@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './ContactForm.css';
+import './ContactForm.scss';
 import FormInputs from '../formInputs/FormInputs';
 import { connect } from 'react-redux';
 import { postContactFormRequest } from '../../redux';
@@ -45,7 +45,7 @@ function ContactForm({ postContactFormRequest }) {
       ) : null}
       <fieldset className="fieldSet">
         <legend className="contact-form">{legend}</legend>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="form-wrapper">
           <div></div>
           <div>
             <FormInputs

@@ -6,7 +6,7 @@ import {
   postDisLikeRequest,
   abortConst,
 } from '../../../redux';
-import './HomeBlog.css';
+import './HomeBlog.scss';
 import SearchInput from '../../searchInput/SearchInput';
 import moment from 'moment';
 import Modal from '../../modal/Modal';

@@ -1,17 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 
 /* variable setup */
-:root {
-  --main-bg-colour: rgba(32, 32, 32, 1);
-  --secondary-bg-colour: rgba(255, 99, 0, 1);
-  --light-orange: rgba(236, 127, 55, 1);
-  --burnt-orange: rgba(190, 79, 12, 1);
-  --main-font-colour: whitesmoke;
-  --border-colour: rgba(200, 200, 200, 0.5);
-  --header-height: 60px;
-  --footer-height: 32px;
-}
-
+$main-bg-colour: rgba(32, 32, 32, 1);
+$secondary-bg-colour: rgba(255, 99, 0, 1);
+$light-orange: rgba(236, 127, 55, 1);
+$burnt-orange: rgba(190, 79, 12, 1);
+$main-font-colour: whitesmoke;
+$border-colour: rgba(200, 200, 200, 0.5);
+$header-height: 4vh;
+$footer-height: 40px;
 /* Box sizing rules */
 *,
 *::before,
@@ -51,8 +48,8 @@ html {
 body {
   font-family: 'Signika', sans-serif;
   font-family: 'Comfortaa', cursive;
-  background-color: var(--main-bg-colour);
-  color: var(--main-font-colour);
+  background-color: $main-bg-colour;
+  color: $main-font-colour;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
@@ -96,6 +93,7 @@ button,
 textarea,
 select {
   font: inherit;
+  border-radius: 4px;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */
@@ -132,9 +130,8 @@ section {
   /* max-width: 1290px; */
   width: 100%;
   margin: 0px auto;
-  height: calc(100vh - var(--header-height) - var(--footer-height));
+  height: calc(100vh - #{$header-height} - #{$footer-height});
   overflow: auto;
-  padding: 0px 1rem;
 }
 
 footer {
@@ -142,11 +139,8 @@ footer {
 }
 
 p {
-  line-height: 1.2;
-  font-size: clamp(1.6rem, 1.25vh, 1.25rem);
-  font-size: max(1.6rem, 1.125vw);
+  line-height: 1.6;
   text-align: left;
-  margin-bottom: 0.4rem;
 }
 
 h1,
@@ -164,7 +158,7 @@ form {
   );
   margin: 0 auto;
   border-radius: 1px;
-  color: var(--main-font-colour);
+  color: $main-font-colour;
   width: 100%;
   padding: 10px 20px;
 }
@@ -183,7 +177,7 @@ input[type='search'],
 form textarea {
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  border-left: 4px solid var(--secondary-bg-colour);
+  border-left: 4px solid $secondary-bg-colour;
   border-radius: 4px;
   font-size: 15px;
   margin: 0;
@@ -208,25 +202,25 @@ form textarea.entered {
   border-left: greenyellow 4px solid;
 }
 form input[type='text'].invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+  border-left: $secondary-bg-colour 4px solid;
 }
 form input[type='email'].invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+  border-left: $secondary-bg-colour 4px solid;
 }
 form input[type='password'].entered {
   border-left: greenyellow 4px solid;
 }
 form input[type='password'].invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+  border-left: $secondary-bg-colour 4px solid;
 }
 input[type='search'].entered {
   border-left: greenyellow 4px solid;
 }
 input[type='search'].invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+  border-left: $secondary-bg-colour 4px solid;
 }
 form textarea.invalid {
-  border-left: var(--secondary-bg-colour) 4px solid;
+  border-left: $secondary-bg-colour 4px solid;
   min-height: 250px;
 }
 
@@ -253,14 +247,14 @@ fieldset.fieldSet {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--main-background-colour);
+  background: $main-bg-colour;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--main-font-colour);
+  background: $main-font-colour;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-colour);
+  background: $border-colour;
 }
 /* SCROLL-BAR CUSTOM STYLING */
 hr {

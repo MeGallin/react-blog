@@ -1,9 +1,11 @@
+@import '../../App.scss';
+
 .logout-button-wrapper {
   display: flex;
   flex-direction: column;
 }
 .userDetails {
-  color: var(--secondary-bg-colour);
+  color: $secondary-bg-colour;
   font-weight: bold;
   font-size: 0.6rem;
 }

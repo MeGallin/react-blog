@@ -1,6 +1,8 @@
+@import '../../App.scss';
+
 footer {
-  background-color: var(--main-font-colour);
-  color: var(--main-bg-colour);
+  background-color: $main-font-colour;
+  color: $main-bg-colour;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,7 +10,7 @@ footer {
   bottom: 0;
   z-index: 100;
   margin-top: auto;
-  height: var(--footer-height);
+  height: $footer-height;
   padding: 0.2rem 0.2em;
   font-size: 0.6em;
 }
@@ -19,7 +21,7 @@ footer form button {
   font-size: 1em;
 }
 footer .modal-wrapper {
-  background-color: var(--main-bg-colour);
+  background-color: $main-bg-colour;
 }
 footer .modal-wrapper form {
   font-size: 1.4em;
