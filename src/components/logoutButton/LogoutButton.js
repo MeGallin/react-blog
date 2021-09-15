@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loginRequest } from '../../redux';
-import './LogoutButton.css';
+import './LogoutButton.scss';
 
 function LogoutButton({ loginRequest, userData }) {
   const [name, setName] = useState('');

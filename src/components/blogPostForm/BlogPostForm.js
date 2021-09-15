@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { postBlogRequest } from '../../redux';
-import './BlogPostForm.css';
+import './BlogPostForm.scss';
 import FormInputs from '../formInputs/FormInputs';
 import QuillEditor from '../quillEditor/QuillEditor';
 

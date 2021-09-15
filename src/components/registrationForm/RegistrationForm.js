@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { postRegistrationRequest, postRegistrationEmail } from '../../redux';
-import './RegistrationForm.css';
+import './RegistrationForm.scss';
 import { v4 as uuidv4 } from 'uuid';
 import { useHistory } from 'react-router-dom';
 import FormInputs from '../formInputs/FormInputs';

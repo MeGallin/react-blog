@@ -1,0 +1,19 @@
+@import '../../App.scss';
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: $header-height;
+}
+nav {
+  border-bottom: 1px solid $main-bg-colour;
+  background-color: $main-font-colour;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem 0.2em;
+}
+.is-active {
+  border-bottom: $secondary-bg-colour 4px solid;
+  color: $secondary-bg-colour;
+}
