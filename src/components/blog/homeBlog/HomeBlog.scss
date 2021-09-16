@@ -38,11 +38,18 @@
 }
 
 .searchWrapper {
+  display: flex;
+  justify-content: space-between;
   input[type='search'] {
     width: MIN(100%, 400px);
   }
   button {
     width: MIN(100%, 400px);
     margin-top: 0.2rem;
+  }
+  .blogNumber {
+    font-size: 0.8rem;
+    color: $secondary-bg-colour;
+    font-weight: bold;
   }
 }
