@@ -138,22 +138,25 @@ function HomeBlog({
   ) : (
     <div>
       <div className="searchWrapper">
-        <SearchInput
-          type="search"
-          placeholder="Search a Title..."
-          handleSearch={(e) =>
-            setSearchField(e.target.value, setIsDisabled(false))
-          }
-          className={searchField.length < 3 ? 'invalid' : 'entered'}
-          value={searchField}
-        />
-        <p></p>
-        <button
-          onClick={() => setSearchField('', setIsDisabled(true))}
-          disabled={isDisabled}
-        >
-          Clear Search
-        </button>
+        <div>
+          <SearchInput
+            type="search"
+            placeholder="Search a Title..."
+            handleSearch={(e) =>
+              setSearchField(e.target.value, setIsDisabled(false))
+            }
+            className={searchField.length < 3 ? 'invalid' : 'entered'}
+            value={searchField}
+          />
+
+          <button
+            onClick={() => setSearchField('', setIsDisabled(true))}
+            disabled={isDisabled}
+          >
+            Clear Search
+          </button>
+        </div>
+        <div className="blogNumber">{filteredBlogs.length} blog to read.</div>
       </div>
 
       <hr />
