@@ -1,6 +1,27 @@
 @import '../../../App.scss';
+@import '../../../scssMixins.scss';
 
-.deleteConfirmationMessage {
-  border: 1px solid red;
-  color: red;
+.display {
+  @include display-text($danger, 1.7rem);
+}
+
+.edit-modal-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  button:first-child {
+    background-color: $secondary-bg-colour;
+    color: $main-font-colour;
+    display: flex;
+    align-items: baseline;
+    opacity: 0.6;
+    cursor: pointer;
+    margin: 0.6rem 0;
+  }
+  button:hover {
+    opacity: 1;
+  }
+  button:last-child {
+    background-color: $danger;
+    color: $main-font-colour;
+  }
 }

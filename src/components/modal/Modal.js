@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import './Modal.scss';
 
-function Modal({ header, content, footer, name, title, ...props }) {
+function Modal({
+  header,
+  content,
+  footer,
+  name,
+  title,
+  closeButtonTitle,
+  ...props
+}) {
   const [showModal, setShowModal] = useState(false);
   const handleShowModal = () => {
     setShowModal(true);
@@ -28,7 +36,9 @@ function Modal({ header, content, footer, name, title, ...props }) {
               <div footer={footer} className="modal-footer">
                 <div>{footer}</div>
               </div>
-              <button onClick={() => setShowModal(false)}>Close</button>
+              <button onClick={() => setShowModal(false)}>
+                {closeButtonTitle}
+              </button>
             </div>
           </div>
         </div>

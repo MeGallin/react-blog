@@ -12,14 +12,21 @@ const modalContent = () => {
   );
 };
 
-const buttonLabel = () => {
+const title = () => {
   return <span>Contact Us</span>;
+};
+const closeButtonTitle = () => {
+  return <span>Cancel</span>;
 };
 
 function Footer() {
   return (
     <footer>
-      <Modal content={modalContent()} title={buttonLabel()} />
+      <Modal
+        content={modalContent()}
+        title={title()}
+        closeButtonTitle={closeButtonTitle()}
+      />
       <DateTime />
     </footer>
   );

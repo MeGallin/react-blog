@@ -6,6 +6,7 @@ import { putBlogRequest } from '../../../redux';
 import { deleteBlogRequest } from '../../../redux';
 import BlogPostForm from '../../blogPostForm/BlogPostForm';
 import FormInputs from '../../formInputs/FormInputs';
+import Modal from '../../modal/Modal';
 
 function Admin({
   blogs,
@@ -15,15 +16,12 @@ function Admin({
   userData,
 }) {
   const [displayForm, setDisplayForm] = useState(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [legend] = useState('Post Blog');
   const [admin, setAdmin] = useState(0);
-
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
   const [showFormId, setShowFormId] = useState('');
-  const [showDeleteId, setShowDeleteId] = useState('');
   const [uuid, setUuid] = useState('');
 
   useEffect(() => {
@@ -49,14 +47,33 @@ function Admin({
     setMessage(message);
   };
 
-  const showDeleteButtons = (id) => {
-    setShowDeleteConfirmation(true);
-    setShowDeleteId(id);
+  const buttonLabel = () => {
+    return <span>Delete</span>;
+  };
+  const modalContent = (blog) => {
+    return (
+      <React.Fragment>
+        <div>
+          <p className="display">Are you sure you want to delete: </p>
+          <h3>{blog.heading}</h3>
+          <p dangerouslySetInnerHTML={{ __html: blog.message }} />
+          <button onClick={() => handleDeleteConfirmation(blog.id)}>
+            Yes, DELETE !
+          </button>
+        </div>
+      </React.Fragment>
+    );
+  };
+  const closeButtonTitle = () => {
+    return (
+      <React.Fragment>
+        <span>I'd rather not.</span>
+      </React.Fragment>
+    );
   };
 
   const handleDeleteConfirmation = (id) => {
     deleteBlogRequest(id);
-    setShowDeleteConfirmation(false);
   };
 
   const handleSubmit = (e) => {
@@ -111,19 +128,28 @@ function Admin({
 
                 <div>
                   {!displayForm ? (
-                    <button
-                      onClick={() =>
-                        showForm(
-                          blog.id,
-                          blog.name,
-                          blog.heading,
-                          blog.admin,
-                          blog.message,
-                        )
-                      }
-                    >
-                      EDIT
-                    </button>
+                    <React.Fragment>
+                      <div className="edit-modal-button-wrapper">
+                        <button
+                          onClick={() =>
+                            showForm(
+                              blog.id,
+                              blog.name,
+                              blog.heading,
+                              blog.admin,
+                              blog.message,
+                            )
+                          }
+                        >
+                          EDIT
+                        </button>
+                        <Modal
+                          title={buttonLabel()}
+                          content={modalContent(blog)}
+                          closeButtonTitle={closeButtonTitle()}
+                        />
+                      </div>
+                    </React.Fragment>
                   ) : (
                     <button onClick={() => setDisplayForm(false)}>
                       Cancel
@@ -207,27 +233,8 @@ function Admin({
                       </fieldset>
                     </div>
                   ) : null}
-                  <button onClick={() => showDeleteButtons(blog.id)}>
-                    DELETE {blog.id}
-                  </button>
+
                   <hr />
-                  {showDeleteConfirmation && blog.id === showDeleteId ? (
-                    <div className="deleteConfirmationMessage">
-                      <h1>Note: this could be a use case for a modal</h1>
-                      <p>
-                        Are you sure you want to delete{' '}
-                        <span>
-                          {blog.heading}[{blog.id}]
-                        </span>
-                      </p>
-                      <button onClick={() => handleDeleteConfirmation(blog.id)}>
-                        Yes, DELETE !
-                      </button>
-                      <button onClick={() => setShowDeleteConfirmation(false)}>
-                        No Thanks
-                      </button>
-                    </div>
-                  ) : null}
                 </div>
               </div>
             ) : null,
