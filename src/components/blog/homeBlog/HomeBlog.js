@@ -129,7 +129,10 @@ function HomeBlog({
   const buttonLabel = () => {
     return <span>Read more . . .</span>;
   };
-  // Modal Stuff
+  const closeButtonTitle = () => {
+    return <span>Cancel</span>;
+  };
+  // END Modal Stuff
 
   return blogs.loading ? (
     <h2>Loading </h2>
@@ -191,6 +194,7 @@ function HomeBlog({
                       blog.dislikes,
                       blog.admin,
                     )}
+                    closeButtonTitle={closeButtonTitle()}
                   />
                 </div>
               </div>
