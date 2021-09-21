@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import './Admin.scss';
 import { connect } from 'react-redux';
 import { getBlogsRequest } from '../../../redux';
@@ -23,6 +23,7 @@ function Admin({
   const [message, setMessage] = useState('');
   const [showFormId, setShowFormId] = useState('');
   const [uuid, setUuid] = useState('');
+  const ref = useRef(null);
 
   useEffect(() => {
     const abortConst = new AbortController();
@@ -37,6 +38,19 @@ function Admin({
       setUuid(userData.userData[0].uuid);
     }
   }, [userData.isAuthorized, userData.userData]);
+
+  useLayoutEffect(() => {
+    const abortConst = new AbortController();
+    if (ref.current !== null) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        alignToTop: true,
+      });
+    }
+    return () => {
+      abortConst.abort();
+    };
+  }, [displayForm]);
 
   const showForm = (id, name, heading, admin, message) => {
     setDisplayForm(true);
@@ -96,9 +110,7 @@ function Admin({
   ) : (
     <section>
       <h2>Admin panel</h2>
-
       <BlogPostForm />
-
       <div>
         {blogs.blogs &&
           blogs.blogs.map((blog) =>
@@ -126,7 +138,7 @@ function Admin({
                   </div>
                 ) : null}
 
-                <div>
+                <div className="editWrapper">
                   {!displayForm ? (
                     <React.Fragment>
                       <div className="edit-modal-button-wrapper">
@@ -150,88 +162,92 @@ function Admin({
                         />
                       </div>
                     </React.Fragment>
-                  ) : (
-                    <button onClick={() => setDisplayForm(false)}>
-                      Cancel
-                    </button>
-                  )}
+                  ) : null}
                   {displayForm && blog.id === showFormId ? (
-                    <div>
-                      <fieldset className="fieldSet">
-                        <legend>{legend}</legend>
-                        <form onSubmit={handleSubmit}>
-                          <div>
-                            <FormInputs
-                              readOnly
-                              label="UUID"
-                              value={uuid}
-                              onChange={(e) => setShowFormId(e.target.value)}
-                              placeholder="uuid"
-                              type="text"
-                              name="uuid"
-                              className={!uuid ? 'invalid' : 'entered'}
-                            />
-                          </div>
-                          <div>
-                            <FormInputs
-                              readOnly
-                              label="Name"
-                              value={
-                                userData.userData[0].name +
-                                userData.userData[0].surname
-                              }
-                              onChange={(e) => setName(e.target.value)}
-                              type="text"
-                              name="name"
-                              className={!name ? 'invalid' : 'entered'}
-                            />
-                          </div>
-                          <div>
-                            <FormInputs
-                              label="Heading"
-                              value={heading}
-                              onChange={(e) => setHeading(e.target.value)}
-                              type="text"
-                              name="heading"
-                              className={
-                                !heading.length ? 'invalid' : 'entered'
-                              }
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="admin">
-                              Admin
-                              <input
-                                value={admin}
-                                onChange={(e) => setAdmin(e.target.value)}
-                                type="number"
-                                max="1"
-                                min="0"
-                                name="admin"
-                              />
-                            </label>
-                          </div>
-
-                          <div>
-                            <label htmlFor="message">
-                              Blog
-                              <textarea
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)}
+                    <React.Fragment>
+                      <div ref={ref}>
+                        <fieldset className="fieldSet">
+                          <legend>{legend}</legend>
+                          <form onSubmit={handleSubmit}>
+                            <div>
+                              <FormInputs
+                                readOnly
+                                label="UUID"
+                                value={uuid}
+                                onChange={(e) => setShowFormId(e.target.value)}
+                                placeholder="uuid"
                                 type="text"
-                                name="message"
+                                name="uuid"
+                                className={!uuid ? 'invalid' : 'entered'}
+                              />
+                            </div>
+                            <div>
+                              <FormInputs
+                                readOnly
+                                label="Name"
+                                value={
+                                  userData.userData[0].name +
+                                  userData.userData[0].surname
+                                }
+                                onChange={(e) => setName(e.target.value)}
+                                type="text"
+                                name="name"
+                                className={!name ? 'invalid' : 'entered'}
+                              />
+                            </div>
+                            <div>
+                              <FormInputs
+                                label="Heading"
+                                value={heading}
+                                onChange={(e) => setHeading(e.target.value)}
+                                type="text"
+                                name="heading"
                                 className={
-                                  message.length < 10 ? 'invalid' : 'entered'
+                                  !heading.length ? 'invalid' : 'entered'
                                 }
                               />
-                            </label>
-                          </div>
-                          <button type="submit" value="submit">
-                            Submit
-                          </button>
-                        </form>
-                      </fieldset>
-                    </div>
+                            </div>
+                            <div>
+                              <label htmlFor="admin">
+                                Admin
+                                <input
+                                  value={admin}
+                                  onChange={(e) => setAdmin(e.target.value)}
+                                  type="number"
+                                  max="1"
+                                  min="0"
+                                  name="admin"
+                                />
+                              </label>
+                            </div>
+
+                            <div>
+                              <label htmlFor="message">
+                                Blog
+                                <textarea
+                                  value={message}
+                                  onChange={(e) => setMessage(e.target.value)}
+                                  type="text"
+                                  name="message"
+                                  className={
+                                    message.length < 10 ? 'invalid' : 'entered'
+                                  }
+                                />
+                              </label>
+                            </div>
+                            <button type="submit" value="submit">
+                              Submit
+                            </button>
+                          </form>
+                        </fieldset>
+                      </div>
+                      <button
+                        onClick={() => setDisplayForm(false)}
+                        disabled={blog.id === showFormId ? false : true}
+                      >
+                        Cancel Edit
+                      </button>
+                    </React.Fragment>
                   ) : null}
 
                   <hr />
