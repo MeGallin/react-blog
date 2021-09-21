@@ -39,7 +39,7 @@ function Header(isAuthorized) {
           </NavLink>
         </div>
 
-        <div>
+        <div className="auth-button-wrapper">
           {isAuthorized.isAuthorized.isAuthorized ? (
             <div>
               <LogoutButton />

@@ -36,7 +36,10 @@ function Modal({
               <div footer={footer} className="modal-footer">
                 <div>{footer}</div>
               </div>
-              <button onClick={() => setShowModal(false)}>
+              <button
+                onClick={() => setShowModal(false)}
+                className="confirmation"
+              >
                 {closeButtonTitle}
               </button>
             </div>

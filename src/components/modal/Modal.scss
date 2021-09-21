@@ -39,8 +39,12 @@
 }
 /* Modal styling END */
 .modal-content-wrapper {
-  /* border: 1px solid blue; */
   height: auto;
+
+  button.confirmation {
+    background-color: $success !important;
+    color: $main-bg-colour !important;
+  }
 }
 .modal-header {
   /* border: 1px solid red; */

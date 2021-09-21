@@ -130,7 +130,7 @@ function HomeBlog({
     return <span>Read more . . .</span>;
   };
   const closeButtonTitle = () => {
-    return <span>Cancel</span>;
+    return <span>Done Reading</span>;
   };
   // END Modal Stuff
 

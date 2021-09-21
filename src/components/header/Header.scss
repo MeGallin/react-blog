@@ -12,7 +12,19 @@ nav {
   justify-content: space-between;
   padding: 0.2rem 0.2em;
   height: $header-height;
+  align-items: baseline;
+  .auth-button-wrapper {
+    display: inherit;
+
+    button {
+      margin: 0;
+    }
+  }
+  a {
+    padding-left: 0.4rem;
+  }
 }
+
 .is-active {
   border-bottom: $secondary-bg-colour 4px solid;
   color: $secondary-bg-colour;
